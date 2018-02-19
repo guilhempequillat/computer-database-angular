@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {NgModule, OnInit} from '@angular/core';
-
+import {NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ComputerService } from './computer.service';
+import { ComputerService } from './service/app.service';
 import {HttpClientModule} from '@angular/common/http';
-import {Computer} from '../model/computer.model';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AppRoutingModule} from './app-routing.module';
+import { HeaderComponent } from './header/header.component';
+import {HeaderModule} from './header/header.module';
 
 
 @NgModule({
@@ -15,6 +17,10 @@ import {Computer} from '../model/computer.model';
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    AppRoutingModule,
+    HeaderModule
   ],
   providers: [ComputerService],
   bootstrap: [AppComponent]

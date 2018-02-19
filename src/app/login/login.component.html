@@ -1,0 +1,19 @@
+<button (click)="sendRequest()">Request</button>
+<button (click)="performLogin()">Autentification</button>
+{{userStat}}
+<form id='connection-form' (ngSubmit)="onSubmit()">
+  <div class='form-group'>
+    <label for="username">User Name</label>
+    <input type="text" class="form-control" id="username"
+           required
+           name="username"
+           [(ngModel)]="user.username">
+  </div>
+  <div class='form-group'>
+    <label for="password">Password</label>
+    <input type="text" class="form-control" id="password"
+           required
+           name="password"
+           [(ngModel)]="user.password">
+  </div>
+  <button type="submit" class="btn btn-success">Submit</button>
