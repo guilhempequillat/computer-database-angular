@@ -9,10 +9,10 @@ import {RequestOptions} from '@angular/http';
 @Injectable()
 export class ComputerService {
 
-  private getAComputerUrl = 'http://127.0.0.1:8080/computer-database/find-a-computer';
+  private getAComputerUrl =   'http://127.0.0.1:8080/computer-database/find-a-computer';
   private getAllComputerUrl = 'http://127.0.0.1:8080/computer-database/find-computer-pagination';
-  private performLoginUrl = 'http://127.0.0.1:8080/computer-database/perform-login';
-
+  private performLoginUrl =   'http://127.0.0.1:8080/computer-database/perform-login';
+  private getCountUrl =          'http://127.0.0.1:8080/computer-database/count-computer';
   private  isConnected = false;
 
   constructor(private http: HttpClient) {
@@ -24,18 +24,12 @@ export class ComputerService {
     return this.http.get<Computer>(`${this.getAComputerUrl}/${id}`,{withCredentials : true, headers : headersGetAComputer });
   }
 
-  getAllComputer(): Observable<Computer[]> {
+  getAllComputer(params): Observable<Computer[]> {
     let headersGetAllComputer = new HttpHeaders();
     headersGetAllComputer = headersGetAllComputer.set('Content-Type', 'text/plain');
-    const params = {
-      order: 'ASC',
-      orderType: 'name',
-      beginComputerDisplay: '0',
-      numberComputerToShow: '50',
-    };
-    const stringParams = JSON.stringify(params);
-    return this.http.get<Computer[]>(this.getAllComputerUrl + '?params=' + stringParams,
-      {withCredentials : true, headers: headersGetAllComputer, body: params});
+
+    return this.http.get<Computer[]>(`${this.getAllComputerUrl}?order=${params.order}&orderType=${params.orderType}&beginComputerDisplay=${params.beginComputerDisplay}&numberComputerToShow=${params.numberComputerToShow}`,
+      {withCredentials : true, headers: headersGetAllComputer});
   }
 
   performLogin(user: User):  Promise<void> {
@@ -49,5 +43,11 @@ export class ComputerService {
 
   getIsConnected(): boolean{
       return this.isConnected;
+  }
+
+  getCount(): Observable<any> {
+    let headerGetCount = new HttpHeaders();
+    headerGetCount = headerGetCount.set('Content-Type', 'text/plain');
+    return this.http.get(this.getCountUrl, {withCredentials : true, headers: headerGetCount});
   }
 }

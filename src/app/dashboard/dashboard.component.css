@@ -1,0 +1,37 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~font-awesome/css/font-awesome.css";
+
+.dashboard-table{
+  display: flex;
+  align-item: center;
+  justify-content: center;
+  border-collapse: collapse;
+}
+
+td {
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  padding: 5px;
+  width: 25%;
+}
+
+.nav-button {
+  display: flex;
+  align-item: center;
+  font-size: 15px;
+  width: 42px;
+  justify-content: center;
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+
+}
+
+
