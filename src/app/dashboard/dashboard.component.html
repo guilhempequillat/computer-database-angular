@@ -1,52 +1,54 @@
 
+<div class="content-page">
+  <h3 *ngIf="count" >{{count}} computers found !</h3>
 
-<h3 *ngIf="count" >{{count}} computers found !</h3>
-
-<div>
-  <button>Add Computer</button>
-  <button>Delete Computer</button>
-  <button>Delete Company</button>
-  <button>Filter</button>
-</div>
-<table class="dashboard-table">
-  <tr>
-    <td (click)="changeOrderType('name')">Name</td>
-    <td (click)="changeOrderType('introduced')">Introduced</td>
-    <td (click)="changeOrderType('discontinued')">Discontinued</td>
-    <td (click)="changeOrderType('company')">Company</td>
-  </tr>
-  <tr *ngFor="let computer of listComputer">
-    <td (click)="updateComputer()">
-      <span>{{computer.name}}</span>
-    </td>
-    <td>
-      <span *ngIf="computer.introduced != null">
-        {{computer?.introduced.dayOfMonth}}-{{computer?.introduced.monthValue}}-{{computer?.introduced.year}}
-      </span>
-    </td>
-    <td>
-      <span *ngIf="computer.discontinued != null">
-        {{computer?.discontinued.dayOfMonth}}-{{computer?.discontinued.monthValue}}-{{computer?.discontinued.year}}
-      </span>
-    </td>
-    <td>
-      <span>{{computer?.company?.name}}</span>
-    </td>
-  </tr>
-</table>
-<footer>
-  <div class="btn-group nav-button-group">
-    <button class="btn btn-primary nav-button" *ngIf="pagination.beginComputerDisplay != 0" (click)="updateNavBarDecrement()">
-      <span class="glyphicon glyphicon-triangle-left"></span>
-    </button>
-    <button *ngFor="let nav of navArray; let i = index" class="btn btn-primary nav-button" (click)="updateNavBar(nav)">
-      <span >{{nav+1}}</span>
-    </button>
-    <button class="btn btn-primary nav-button" (click)="updateNavBarIncrement()"
-            *ngIf="pagination.beginComputerDisplay + pagination.numberComputerToShow < count">
-      <span class="glyphicon glyphicon-triangle-right"></span>
-    </button>
+  <div>
+    <button>Add Computer</button>
+    <button>Delete Computer</button>
+    <button>Delete Company</button>
+    <button>Filter</button>
   </div>
-</footer>
-<link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+  <table class="dashboard-table">
+    <tr>
+      <td (click)="changeOrderType('name')">Name</td>
+      <td (click)="changeOrderType('introduced')">Introduced</td>
+      <td (click)="changeOrderType('discontinued')">Discontinued</td>
+      <td (click)="changeOrderType('company')">Company</td>
+    </tr>
+    <tr *ngFor="let computer of listComputer">
+      <td (click)="updateComputer()">
+        <span>{{computer.name}}</span>
+      </td>
+      <td>
+        <span *ngIf="computer.introduced != null">
+          {{computer?.introduced.dayOfMonth}}-{{computer?.introduced.monthValue}}-{{computer?.introduced.year}}
+        </span>
+      </td>
+      <td>
+        <span *ngIf="computer.discontinued != null">
+          {{computer?.discontinued.dayOfMonth}}-{{computer?.discontinued.monthValue}}-{{computer?.discontinued.year}}
+        </span>
+      </td>
+      <td>
+        <span>{{computer?.company?.name}}</span>
+      </td>
+    </tr>
+  </table>
+</div>
+  <footer>
+    <div class="btn-group nav-button-group">
+      <button class="btn btn-primary nav-button" *ngIf="pagination.beginComputerDisplay != 0" (click)="updateNavBarDecrement()">
+        <span class="glyphicon glyphicon-triangle-left"></span>
+      </button>
+      <button *ngFor="let nav of navArray; let i = index" class="btn btn-primary nav-button" (click)="updateNavBar(nav)">
+        <span >{{nav+1}}</span>
+      </button>
+      <button class="btn btn-primary nav-button" (click)="updateNavBarIncrement()"
+              *ngIf="pagination.beginComputerDisplay + pagination.numberComputerToShow < count">
+        <span class="glyphicon glyphicon-triangle-right"></span>
+      </button>
+    </div>
+  </footer>
+  <link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+

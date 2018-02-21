@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
     order: 'ASC',
     orderType: 'name',
     beginComputerDisplay: 0,
-    numberComputerToShow: 10,
+    numberComputerToShow: 50,
     userFilter: false
   };
   private navArray = new Array(7);
@@ -95,15 +95,18 @@ export class DashboardComponent implements OnInit {
 
     if (nbSuggestedPagesBefore < 5) { //Case at the begining
       const nbSuggestedPagesAfterBegining = nbSuggestedPagesBefore + nbPagesAfter > 10 ? 10 - nbSuggestedPagesBefore : nbPagesAfter;
-      this.navArray = new Array(nbSuggestedPagesBefore + nbSuggestedPagesAfterBegining );
-      for ( let i = 0 ; i < this.navArray.length ; i++) {
+      this.navArray = new Array(nbSuggestedPagesBefore + nbSuggestedPagesAfterBegining);
+      for (let i = 0; i < this.navArray.length; i++) {
         this.navArray[i] = i + courantPage - nbSuggestedPagesBefore;
       }
-    }else {
-
-      //Case at the end
-
-      //Case at the middle
+    } else if ( nbSuggestedPagesAfter < 5 ) {//Case at the end
+      const nbSuggestedPagesBeforeEnd = nbSuggestedPagesAfter + courantPage > 10 ? 10 - nbSuggestedPagesAfter : courantPage;
+      this.navArray = new Array(nbSuggestedPagesAfter + nbSuggestedPagesBeforeEnd);
+      for (let i = 0; i < this.navArray.length; i++) {
+        this.navArray[i] = i + courantPage - nbSuggestedPagesBeforeEnd;
+      }
+    }
+    else {//Case at the middle
       this.navArray = new Array(totalLenght);
       for (let i = 0; i < this.navArray.length; i++) {
         this.navArray[i] = i + courantPage - nbSuggestedPagesBefore;
