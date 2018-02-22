@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../model/user.model';
 import {Computer} from '../model/computer.model';
 import {ComputerService} from '../service/app.service';
+import {ActivatedRoute, Route, Router, RouterLink, RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   private computer: Computer;
   private user: User;
 
-  constructor(private computerService: ComputerService) {
+  constructor(private computerService: ComputerService,
+              private router: Router) {
     this.user = new User();
   }
 
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
   public callbackLogin(): void {
     console.log(this.computerService.getIsConnected());
     if (this.computerService.getIsConnected()) {
-      console.log('The user is connected');
+      this.router.navigate(['/dashboard']);
     }
   }
 
@@ -52,9 +54,5 @@ export class LoginComponent implements OnInit {
   }
   onSubmit() {
     this.performLogin();
-  }
-
-  get userStat(){
-    return JSON.stringify(this.user);
   }
 }

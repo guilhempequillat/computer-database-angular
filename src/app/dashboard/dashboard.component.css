@@ -1,11 +1,6 @@
-@import "~bootstrap/dist/css/bootstrap.min.css";
-@import "~font-awesome/css/font-awesome.css";
-
 .dashboard-table{
-  display: flex;
-  align-item: center;
-  justify-content: center;
   border-collapse: collapse;
+  width: 100%;
 }
 
 td {
@@ -13,7 +8,6 @@ td {
   border-style: solid;
   border-width: 1px;
   padding: 5px;
-  width: 25%;
 }
 
 .nav-button {
@@ -21,6 +15,7 @@ td {
   align-item: center;
   font-size: 15px;
   width: 42px;
+  height: 35px;
   justify-content: center;
 }
 
@@ -34,6 +29,3 @@ footer {
 
 }
 
-.content-page {
-  margin-top: 80px;
-}

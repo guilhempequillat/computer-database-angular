@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChildren} from '@angular/core';
 import {Computer} from '../model/computer.model';
 import {ComputerService} from '../service/app.service';
 
@@ -11,6 +11,9 @@ export class DashboardComponent implements OnInit {
 
   private listComputer: Computer[];
   private count: number;
+  private deleteMode: boolean;
+  private listComputerToDelete: number[];
+
   private pagination = {
     order: 'ASC',
     orderType: 'name',
@@ -20,6 +23,10 @@ export class DashboardComponent implements OnInit {
   };
   private navArray = new Array(7);
 
+  @ViewChildren('cbx') checkboxes;
+  getChecked = () => {
+    return this.checkboxes.toArray().map(x => x.nativeElement);
+  }
 
   constructor(private computerService: ComputerService) {
   }
@@ -27,7 +34,19 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getComputers();
     this.getCount();
+    this.deleteMode = false;
   }
+
+  changeDeleteMode() {
+    this.deleteMode = !this.deleteMode;
+  }
+
+  confirmDelete() {
+    console.log(checkboxes);
+    console.log(this.getChecked);
+  }
+
+
 
   getComputers() {
     if (this.pagination.userFilter) {

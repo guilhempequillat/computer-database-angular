@@ -6,6 +6,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {LoginModule} from './login/login.module';
 import {LoginComponent} from './login/login.component';
+import {AddComputerComponent} from './add-computer/add-computer.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'add-computer',
+    component: AddComputerComponent,
     pathMatch: 'full'
   }
 ]

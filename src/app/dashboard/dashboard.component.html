@@ -1,21 +1,29 @@
 
-<div class="content-page">
+<div class="container">
   <h3 *ngIf="count" >{{count}} computers found !</h3>
-
   <div>
-    <button>Add Computer</button>
-    <button>Delete Computer</button>
+    <button routerLink="/add-computer">Add Computer</button>
+    <button (click)="changeDeleteMode()">Delete Computer</button>
     <button>Delete Company</button>
     <button>Filter</button>
+
   </div>
   <table class="dashboard-table">
     <tr>
+      <td *ngIf="deleteMode">
+        <button (click)="confirmDelete()"  class="btn btn-danger">Trash</button>
+      </td>
       <td (click)="changeOrderType('name')">Name</td>
       <td (click)="changeOrderType('introduced')">Introduced</td>
       <td (click)="changeOrderType('discontinued')">Discontinued</td>
       <td (click)="changeOrderType('company')">Company</td>
     </tr>
-    <tr *ngFor="let computer of listComputer">
+    <tr *ngFor="let computer of listComputer; let j = index">
+      <td *ngIf="deleteMode">
+        <input type="checkbox" #cbx
+               value="{{computer.id}}"
+               name="computerToRemove"/>
+      </td>
       <td (click)="updateComputer()">
         <span>{{computer.name}}</span>
       </td>
@@ -30,7 +38,9 @@
         </span>
       </td>
       <td>
-        <span>{{computer?.company?.name}}</span>
+        <span *ngIf="computer.company != null">
+          {{computer.company.name}}
+        </span>
       </td>
     </tr>
   </table>
@@ -49,6 +59,4 @@
       </button>
     </div>
   </footer>
-  <link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
 
