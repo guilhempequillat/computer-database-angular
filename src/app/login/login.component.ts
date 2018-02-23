@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   private computer: Computer;
   private user: User;
+  private loginMode: boolean;
 
   constructor(private computerService: ComputerService,
               private router: Router) {
@@ -27,12 +28,9 @@ export class LoginComponent implements OnInit {
     this.user.password = "" ;
   }
 
-  sendRequest() {
-    this.loadAComputer(20);
-  }
-
   performLogin() {
-    this.computerService.performLogin(this.user).then(() => this.callbackLogin());
+    this.computerService.performLogin(this.user)
+      .then(() => this.callbackLogin());
     console.log(this.computerService.getIsConnected());
   }
 
@@ -49,10 +47,18 @@ export class LoginComponent implements OnInit {
         this.computer = computer;
         console.log(computer);
         console.log('Request done');
+      }, (err) => {
+        console.log(err.status)
       }
     );
   }
   onSubmit() {
     this.performLogin();
+  }
+  loginModeChange() {
+    this.loginMode = true;
+  }
+  registerModeChange() {
+    this.loginMode = false;
   }
 }

@@ -37,10 +37,13 @@ export class ComputerService {
   performLogin(user: User):  Promise<void> {
     let headersLogin = new HttpHeaders();
     headersLogin = headersLogin.set('Content-Type', 'text/plain');
-    return this.http
-      .post(`${this.performLoginUrl}?username=${user.username}&password=${user.password}`, '' , {withCredentials : true, headers : headersLogin})
+    return this.http.post(`${this.performLoginUrl}?username=${user.username}&password=${user.password}`,
+      '' , {withCredentials : true, headers : headersLogin})
       .toPromise()
-      .then(() => {this.isConnected = true; } );
+      .then(() => {this.isConnected = true; } )
+      .catch((err) => {
+        this.isConnected = false;
+      });
   }
 
   getIsConnected(): boolean{
@@ -53,7 +56,7 @@ export class ComputerService {
     return this.http.get(this.getCountUrl, {withCredentials : true, headers: headerGetCount});
   }
 
-  getCompanies(): Observable<Company[]> {
+  getCompanies(): Observable<any> {
     let headerGetCompanies = new HttpHeaders();
     headerGetCompanies = headerGetCompanies.set('Content-Type', 'text/plain');
     return this.http.get(this.getCompaniesUrl, {withCredentials : true, headers: headerGetCompanies});
@@ -62,7 +65,6 @@ export class ComputerService {
   postCreateComputer(computer: Computer): Observable<any> {
     let headerPostCreateComputer = new HttpHeaders();
     headerPostCreateComputer = headerPostCreateComputer.set('Content-Type', 'test/plain');
-    console.log('Company id : '+ computer.company.id);
     return this.http.post(`${this.postCreateComptuerUrl}?name=${computer.name}&introduced=${computer.introduced}&discontinued=${computer.discontinued}&idCompany=${computer.company.id}`,
       '', {withCredentials: true, headers: headerPostCreateComputer});
   }

@@ -1,0 +1,23 @@
+.container {
+  padding-top: 20px;
+  background-color: rgb(240,240,240);
+  color: black;
+  padding-bottom: 20px;
+  border-radius: 10px;
+}
+
+.login-choise {
+  width: 50%;
+  color: white;
+  background-color: rgb(90,90,90);
+  border-color: rgb(80,80,80);
+  margin-bottom: 20px;
+}
+
+.login-choise:hover,
+.login-choise:focus,
+.login-choise :active {
+  background-color: rgb(80,80,80);
+  border-color: rgb(70,70,70);
+  color: white;
+}

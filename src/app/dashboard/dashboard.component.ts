@@ -23,11 +23,6 @@ export class DashboardComponent implements OnInit {
   };
   private navArray = new Array(7);
 
-  @ViewChildren('cbx') checkboxes;
-  getChecked = () => {
-    return this.checkboxes.toArray().map(x => x.nativeElement);
-  }
-
   constructor(private computerService: ComputerService) {
   }
 
@@ -41,10 +36,7 @@ export class DashboardComponent implements OnInit {
     this.deleteMode = !this.deleteMode;
   }
 
-  confirmDelete() {
-    console.log(checkboxes);
-    console.log(this.getChecked);
-  }
+
 
 
 
