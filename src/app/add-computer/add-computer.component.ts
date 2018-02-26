@@ -57,4 +57,9 @@ export class AddComputerComponent implements OnInit {
   getComputerJson() {
     return JSON.stringify(this.computer);
   }
+
+  updateComputer(id) {
+    console.log(id);
+    this.router.navigate(['/update-computer/' + id]);
+  }
 }

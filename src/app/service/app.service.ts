@@ -16,6 +16,7 @@ export class ComputerService {
   private getCountUrl =           'http://127.0.0.1:8080/computer-database/count-computer';
   private getCompaniesUrl =       'http://127.0.0.1:8080/computer-database/find-all-companies';
   private postCreateComptuerUrl = 'http://127.0.0.1:8080/computer-database/create-computer';
+  private deleteComputerUrl =        'http://127.0.0.1:8080/computer-database/delete-computer';
   private  isConnected = false;
 
   constructor(private http: HttpClient) {
@@ -67,5 +68,11 @@ export class ComputerService {
     headerPostCreateComputer = headerPostCreateComputer.set('Content-Type', 'test/plain');
     return this.http.post(`${this.postCreateComptuerUrl}?name=${computer.name}&introduced=${computer.introduced}&discontinued=${computer.discontinued}&idCompany=${computer.company.id}`,
       '', {withCredentials: true, headers: headerPostCreateComputer});
+  }
+
+  deleteComputer(id: string): Observable<any> {
+    let headerDeleteComputer = new HttpHeaders();
+    headerDeleteComputer = headerDeleteComputer.set('Content-Type', 'test/plain');
+    return this.http.delete(`${this.deleteComputerUrl}?id=${id}`, {withCredentials: true, headers: headerDeleteComputer});
   }
 }

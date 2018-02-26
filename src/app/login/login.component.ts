@@ -3,6 +3,7 @@ import {User} from '../model/user.model';
 import {Computer} from '../model/computer.model';
 import {ComputerService} from '../service/app.service';
 import {ActivatedRoute, Route, Router, RouterLink, RouterModule} from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   private computer: Computer;
   private user: User;
   private loginMode: boolean;
+  private verifPassword: string;
 
   constructor(private computerService: ComputerService,
               private router: Router) {
@@ -26,6 +28,8 @@ export class LoginComponent implements OnInit {
     this.user = new User();
     this.user.username = "" ;
     this.user.password = "" ;
+    this.user.email = "";
+    this.verifPassword = "";
   }
 
   performLogin() {
@@ -60,5 +64,21 @@ export class LoginComponent implements OnInit {
   }
   registerModeChange() {
     this.loginMode = false;
+  }
+
+  onSubmitRegister() {
+
+  }
+  verifPasswordChange() {
+    const inputRePassword = document.getElementById('repassword');
+    if (this.user.password === this.verifPassword) {
+      console.log('same');
+      inputRePassword.classList.remove('ng-invalid');
+      inputRePassword.classList.add('ng-valid');
+
+    } else {
+      inputRePassword.classList.add('ng-invalid');
+      inputRePassword.classList.remove('ng-valid');
+    }
   }
 }

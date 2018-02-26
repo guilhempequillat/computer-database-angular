@@ -5,6 +5,7 @@ import {RouterModule} from '@angular/router';
 import {ComputerService} from '../service/app.service';
 import { AddComputerComponent } from '../add-computer/add-computer.component';
 import {FormsModule} from '@angular/forms';
+import { UpdateComputerComponent } from '../update-computer/update-computer.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -13,7 +14,7 @@ import {FormsModule} from '@angular/forms';
     RouterModule,
     FormsModule,
   ],
-  declarations: [DashboardComponent, AddComputerComponent],
+  declarations: [DashboardComponent, AddComputerComponent, UpdateComputerComponent],
   providers: [ComputerService]
 })
 export class DashboardModule { }

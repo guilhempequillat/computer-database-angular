@@ -9,7 +9,7 @@
 
   </div>
   <table class="dashboard-table">
-    <tr>
+    <tr class="title-table">
       <td *ngIf="deleteMode">
         <button (click)="confirmDelete()"  class="btn btn-danger">Trash</button>
       </td>
@@ -20,11 +20,11 @@
     </tr>
     <tr *ngFor="let computer of listComputer; let j = index">
       <td *ngIf="deleteMode">
-        <input type="checkbox" #cbx
+        <input type="checkbox" (click)="getComputerIdToDelete()"
                value="{{computer.id}}"
                name="computerToRemove"/>
       </td>
-      <td (click)="updateComputer()">
+      <td (click)="updateComputer(computer.id)" class="name-computer-table">
         <span>{{computer.name}}</span>
       </td>
       <td>

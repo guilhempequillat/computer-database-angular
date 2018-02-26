@@ -1,6 +1,14 @@
 .dashboard-table{
   border-collapse: collapse;
   width: 100%;
+  background-color: white;
+}
+
+.title-table {
+  font-size: 110%;
+  font-weight: bold;
+  cursor: pointer;
+
 }
 
 td {
@@ -26,6 +34,28 @@ footer {
   align-items: center;
   justify-content: center;
   display: flex;
+}
+
+.container {
+  background-color: rgb(230,230,230);
+  border-radius: 10px;
+  margin-bottom: 60px;
+  padding-bottom: 15px;
+}
+
+.name-computer-table {
+  cursor: pointer;
+  transition-duration: 0.8s;
+  transition-property: background-color color;
 
 }
+.name-computer-table:hover {
+  cursor: pointer;
+  background-color: rgb(150,150,150);
+  color: white;
+}
+
+
+
+
 

@@ -7,6 +7,7 @@ import {DashboardModule} from './dashboard/dashboard.module';
 import {LoginModule} from './login/login.module';
 import {LoginComponent} from './login/login.component';
 import {AddComputerComponent} from './add-computer/add-computer.component';
+import {UpdateComputerComponent} from './update-computer/update-computer.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,12 @@ const routes: Routes = [
     path: 'add-computer',
     component: AddComputerComponent,
     pathMatch: 'full'
-  }
+  },
+  {
+    path: 'update-computer/:id',
+    component: UpdateComputerComponent,
+    pathMatch: 'full'
+  },
 ]
 
 @NgModule({

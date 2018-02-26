@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChildren} from '@angular/core';
 import {Computer} from '../model/computer.model';
 import {ComputerService} from '../service/app.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,7 @@ export class DashboardComponent implements OnInit {
   private listComputer: Computer[];
   private count: number;
   private deleteMode: boolean;
-  private listComputerToDelete: number[];
+  private listComputerToDelete: string[];
 
   private pagination = {
     order: 'ASC',
@@ -23,7 +24,8 @@ export class DashboardComponent implements OnInit {
   };
   private navArray = new Array(7);
 
-  constructor(private computerService: ComputerService) {
+  constructor(private computerService: ComputerService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -36,8 +38,22 @@ export class DashboardComponent implements OnInit {
     this.deleteMode = !this.deleteMode;
   }
 
+  getComputerIdToDelete() {
+    const computerInput = new Array();
+    for (let i = 0 ; i < document.getElementsByName('computerToRemove').length ; i++){
+      computerInput.push(document.getElementsByName('computerToRemove')[i]);
+    };
+    this.listComputerToDelete = computerInput.filter(com => com.checked)
+      .map(com => com.value);
+    console.log(this.listComputerToDelete);
+  }
 
-
+  confirmDelete() {
+    this.listComputerToDelete.map(id => this.computerService.deleteComputer(id)
+      .subscribe((response: any) => {
+        this.ngOnInit();
+    }));
+  }
 
 
   getComputers() {
@@ -91,7 +107,7 @@ export class DashboardComponent implements OnInit {
   }
   updateNavBarIncrement() {
     this.pagination.beginComputerDisplay += this.pagination.numberComputerToShow;
-    this.getComputers()
+    this.getComputers();
     this.navArrayLength();
   }
 
@@ -124,4 +140,10 @@ export class DashboardComponent implements OnInit {
       }
     }
   }
+
+  updateComputer(id: string) {
+    console.log(id);
+    this.router.navigate(['/update-computer/' + id]);
+  }
+
 }
