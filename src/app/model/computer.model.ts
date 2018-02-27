@@ -1,9 +1,10 @@
 import {Company} from './company.model';
+import {CustomDate} from './customDate.model';
 
 export class Computer {
   id: number;
   name: string;
-  introduced: string;
-  discontinued: string;
+  introduced: CustomDate;
+  discontinued: CustomDate;
   company: Company;
 }

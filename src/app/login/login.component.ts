@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
         console.log(computer);
         console.log('Request done');
       }, (err) => {
-        console.log(err.status)
+        console.log(err.status);
       }
     );
   }

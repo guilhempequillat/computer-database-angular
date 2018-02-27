@@ -16,7 +16,11 @@ export class ComputerService {
   private getCountUrl =           'http://127.0.0.1:8080/computer-database/count-computer';
   private getCompaniesUrl =       'http://127.0.0.1:8080/computer-database/find-all-companies';
   private postCreateComptuerUrl = 'http://127.0.0.1:8080/computer-database/create-computer';
-  private deleteComputerUrl =        'http://127.0.0.1:8080/computer-database/delete-computer';
+  private deleteComputerUrl =     'http://127.0.0.1:8080/computer-database/delete-computer';
+  private updateNameUrl =         'http://127.0.0.1:8080/computer-database/update-name';
+  private updateIntroducedUrl =   'http://127.0.0.1:8080/computer-database/update-introduced';
+  private updateDiscontinuedUrl = 'http://127.0.0.1:8080/computer-database/update-discontinued';
+  private updateCompanyUrl =      'http://127.0.0.1:8080/computer-database/update-company';
   private  isConnected = false;
 
   constructor(private http: HttpClient) {
@@ -65,14 +69,38 @@ export class ComputerService {
 
   postCreateComputer(computer: Computer): Observable<any> {
     let headerPostCreateComputer = new HttpHeaders();
-    headerPostCreateComputer = headerPostCreateComputer.set('Content-Type', 'test/plain');
+    headerPostCreateComputer = headerPostCreateComputer.set('Content-Type', 'text/plain');
     return this.http.post(`${this.postCreateComptuerUrl}?name=${computer.name}&introduced=${computer.introduced}&discontinued=${computer.discontinued}&idCompany=${computer.company.id}`,
       '', {withCredentials: true, headers: headerPostCreateComputer});
   }
 
   deleteComputer(id: string): Observable<any> {
     let headerDeleteComputer = new HttpHeaders();
-    headerDeleteComputer = headerDeleteComputer.set('Content-Type', 'test/plain');
+    headerDeleteComputer = headerDeleteComputer.set('Content-Type', 'text/plain');
     return this.http.delete(`${this.deleteComputerUrl}?id=${id}`, {withCredentials: true, headers: headerDeleteComputer});
+  }
+
+  updateName(id: string, name: string): Observable<any> {
+    let headerUpdateName = new HttpHeaders();
+    headerUpdateName = headerUpdateName.set('Content-Type', 'text/plain');
+    return this.http.put(`${this.updateNameUrl}?id=${id}&name=${name}`, '' , {withCredentials: true, headers: headerUpdateName});
+  }
+  updateIntroduced(id: string, introduced: string): Observable<any> {
+    let headerUpdateIntroduced = new HttpHeaders();
+    headerUpdateIntroduced = headerUpdateIntroduced.set('Content-Type', 'text/plain');
+    return this.http.put(`${this.updateIntroducedUrl}?id=${id}&introduced=${introduced}`, '',
+      {withCredentials: true, headers: headerUpdateIntroduced});
+  }
+  updateDiscontinued(id: string, discontinued: string): Observable<any> {
+    let headerUpdateDiscontinued = new HttpHeaders();
+    headerUpdateDiscontinued = headerUpdateDiscontinued.set('Content-Type', 'text/plain');
+    return this.http.put(`${this.updateDiscontinuedUrl}?id=${id}&discontinued=${discontinued}`, '',
+      {withCredentials: true, headers: headerUpdateDiscontinued});
+  }
+  updateCompany(id: string, companyId: string): Observable<any> {
+    let headerUpdateCompany = new HttpHeaders();
+    headerUpdateCompany = headerUpdateCompany.set('Content-Type', 'text/plain');
+    return this.http.put(`${this.updateNameUrl}?id=${id}&idCompany=${companyId}`, '',
+      {withCredentials: true, headers: headerUpdateCompany});
   }
 }
