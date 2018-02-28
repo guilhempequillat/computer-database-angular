@@ -27,8 +27,10 @@
       <div class="form-group">
         <label for="companyId">Company</label>
         <select class="form-control" id="companyId" name="companyId" formControlName="companyId">
-          <option *ngFor="let company of listCompany" value="{{company.id}}">
-            {{company.name}}
+          <option *ngFor="let company of listCompany"
+                  value="{{company.id}}"
+                  [selected]="company.id<10">
+            {{company.name}}**{{company.id}}-{{computer.company_id}} && {{company.id == computer.company_id}}
           </option>
         </select>
       </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Computer} from '../model/computer.model';
 import {ComputerService} from '../service/app.service';
 import {Company} from '../model/company.model';
@@ -19,13 +19,10 @@ export class UpdateComputerComponent implements OnInit {
   private introduced: string;
   private discontinued: string;
   constructor(private route: ActivatedRoute,
-              private computerSerivce: ComputerService) { }
+              private computerSerivce: ComputerService,
+              private router: Router) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.loadComputerToUpdate(this.route.snapshot.paramMap.get('id'));
-    this.loadCompanies();
-
     this.updateForm = new FormGroup({
       name :  new FormControl({
         validators: [Validators.required]
@@ -40,13 +37,14 @@ export class UpdateComputerComponent implements OnInit {
         validators: [Validators.required]
       })
     });
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.loadComputerToUpdate(this.route.snapshot.paramMap.get('id'));
+    this.loadCompanies();
   }
 
   loadComputerToUpdate(id) {
     this.computerSerivce.getAComputer(id).subscribe((computer: Computer) => {
       this.computer = computer;
-
-      console.log(this.computer.introduced);
       if (this.computer.introduced != null) {
         const introducedMonth = this.computer.introduced.monthValue < 10 ?
           `0${this.computer.introduced.monthValue}` : `${this.computer.introduced.monthValue}`;
@@ -65,6 +63,10 @@ export class UpdateComputerComponent implements OnInit {
           discontinuedMonth + '-' +
           discontinuedDay;
       }
+
+      console.log(computer);
+      console.log(this.updateForm.value.companyId);
+      console.log(typeof(this.updateForm.value.companyId));
     });
   }
 
@@ -77,21 +79,23 @@ export class UpdateComputerComponent implements OnInit {
   onSubmit() {
     if (typeof(this.updateForm.value.name) === 'string') {
       this.computerSerivce.updateName(this.id, this.updateForm.value.name).subscribe((response: any) => {
-        console.log(response);
+        this.router.navigate(['dashboard']);
       });
     }
     if (typeof(this.updateForm.value.introduced) === 'string') {
       this.computerSerivce.updateIntroduced(this.id, this.updateForm.value.introduced).subscribe( (response: any) => {
-        console.log(response);
+        this.router.navigate(['dashboard']);
       });
     }
     if (typeof(this.updateForm.value.discontinued) === 'string') {
       this.computerSerivce.updateDiscontinued(this.id, this.updateForm.value.discontinued).subscribe(( response: any) => {
-        console.log(response);
+        this.router.navigate(['dashboard']);
       });
     }
-    if (typeof(this.updateForm.value.company) === 'string') {
-      this.computerSerivce.updateCompany(this.id, this.updateForm.value.companyId);
+    if (typeof(this.updateForm.value.companyId) === 'string') {
+      this.computerSerivce.updateCompany(this.id, this.updateForm.value.companyId).subscribe(( response: any) => {
+        this.router.navigate(['dashboard']);
+      });
     }
   }
 }

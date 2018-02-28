@@ -8,6 +8,8 @@ import {LoginModule} from './login/login.module';
 import {LoginComponent} from './login/login.component';
 import {AddComputerComponent} from './add-computer/add-computer.component';
 import {UpdateComputerComponent} from './update-computer/update-computer.component';
+import {DeleteCompanyComponent} from './delete-company/delete-company.component';
+import {AddCompanyComponent} from './add-company/add-company.component';
 
 const routes: Routes = [
   {
@@ -28,6 +30,16 @@ const routes: Routes = [
   {
     path: 'update-computer/:id',
     component: UpdateComputerComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'delete-company',
+    component: DeleteCompanyComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'add-company',
+    component: AddCompanyComponent,
     pathMatch: 'full'
   },
 ]

@@ -22,6 +22,12 @@ export class DashboardComponent implements OnInit {
     numberComputerToShow: 50,
     userFilter: false
   };
+  private filter = {
+    byName: '',
+    byIntroduced: '',
+    byDiscontinued: '',
+    byCompany: ''
+  };
   private navArray = new Array(7);
 
   constructor(private computerService: ComputerService,
@@ -30,8 +36,14 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getComputers();
-    this.getCount();
+
     this.deleteMode = false;
+    this.filter = {
+      byName: '',
+      byIntroduced: '',
+      byDiscontinued: '',
+      byCompany: ''
+    };
   }
 
   changeDeleteMode() {
@@ -52,26 +64,47 @@ export class DashboardComponent implements OnInit {
     this.listComputerToDelete.map(id => this.computerService.deleteComputer(id)
       .subscribe((response: any) => {
         this.ngOnInit();
-    }));
+    }, (error: any) => {
+        if (error.status === 401) {
+          this.router.navigate(['/login']);
+          console.error(error.status);
+        }
+      }));
   }
 
 
   getComputers() {
     if (this.pagination.userFilter) {
+      this.getCountFilter();
       this.getComputerWithFilter();
     } else {
+      this.getCount();
       this.getComputerWithoutFilter();
     }
   }
 
   getComputerWithFilter() {
-
+    console.log(this.filter);
+    this.computerService.getAllComputerFilter(this.pagination, this.filter).subscribe(
+      (listComputer: Computer[]) => {
+        this.listComputer = listComputer;
+      }, (error: any) => {
+        if (error.status === 401) {
+          this.router.navigate(['/login']);
+          console.error(error.status);
+        }
+      });
   }
 
   getComputerWithoutFilter() {
     this.computerService.getAllComputer(this.pagination).subscribe(
       (listComputer: Computer[]) => {
         this.listComputer = listComputer;
+      }, (error: any) => {
+        if (error.status === 401) {
+          this.router.navigate(['/login']);
+          console.error(error.status);
+        }
       });
   }
 
@@ -79,6 +112,21 @@ export class DashboardComponent implements OnInit {
     this.computerService.getCount().subscribe(
       (result: any) => {
         this.count = result.count;
+        this.navArrayLength();
+      }, (error: any) => {
+        if (error.status === 401) {
+          this.router.navigate(['/dashboard']);
+          console.error(error.status);
+        }
+      }
+    );
+  }
+
+  getCountFilter() {
+    this.computerService.getCountFilter(this.filter).subscribe(
+      (result: any) => {
+        console.log(result);
+        this.count = result;
         this.navArrayLength();
       }
     );
@@ -102,7 +150,6 @@ export class DashboardComponent implements OnInit {
   updateNavBarDecrement() {
     this.pagination.beginComputerDisplay -= this.pagination.numberComputerToShow;
     this.getComputers();
-
     this.navArrayLength();
   }
   updateNavBarIncrement() {
@@ -112,7 +159,6 @@ export class DashboardComponent implements OnInit {
   }
 
   navArrayLength() {
-    console.log(Math.ceil(this.count / this.pagination.numberComputerToShow));
     const courantPage = this.pagination.beginComputerDisplay / this.pagination.numberComputerToShow;
     const nbPagesAfter = Math.ceil(this.count / this.pagination.numberComputerToShow - courantPage);
 
@@ -132,8 +178,7 @@ export class DashboardComponent implements OnInit {
       for (let i = 0; i < this.navArray.length; i++) {
         this.navArray[i] = i + courantPage - nbSuggestedPagesBeforeEnd;
       }
-    }
-    else {//Case at the middle
+    } else {//Case at the middle
       this.navArray = new Array(totalLenght);
       for (let i = 0; i < this.navArray.length; i++) {
         this.navArray[i] = i + courantPage - nbSuggestedPagesBefore;
@@ -144,6 +189,23 @@ export class DashboardComponent implements OnInit {
   updateComputer(id: string) {
     console.log(id);
     this.router.navigate(['/update-computer/' + id]);
+  }
+
+  updateNbComputerToShow(nbComputer) {
+    this.pagination.numberComputerToShow = nbComputer;
+    this.pagination.beginComputerDisplay = 0;
+    this.getComputers();
+    this.navArrayLength();
+  }
+
+  toggleUseFilter() {
+    this.pagination.userFilter = !this.pagination.userFilter;
+  }
+
+  applyFilter() {
+    this.pagination.beginComputerDisplay = 0;
+    this.getComputers();
+    this.navArrayLength();
   }
 
 }

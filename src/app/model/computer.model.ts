@@ -7,4 +7,5 @@ export class Computer {
   introduced: CustomDate;
   discontinued: CustomDate;
   company: Company;
+  company_id: string;
 }

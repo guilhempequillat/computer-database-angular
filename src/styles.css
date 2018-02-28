@@ -2,3 +2,10 @@
   background-color: rgb(190,190,190);
 
 }
+.container {
+  padding-top: 20px;
+  background-color: rgb(240,240,240);
+  color: black;
+  padding-bottom: 20px;
+  border-radius: 10px;
+}

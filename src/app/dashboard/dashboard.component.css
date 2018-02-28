@@ -8,10 +8,16 @@
   font-size: 110%;
   font-weight: bold;
   cursor: pointer;
-
+  background-color: rgb(80,80,80);
+  color: white;
+  border-top-color: rgb(0,0,0);
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
 }
 
 td {
+  border-top-color: rgb(0,0,0);
   border-color: black;
   border-style: solid;
   border-width: 1px;
@@ -55,7 +61,9 @@ footer {
   color: white;
 }
 
+.nb-computer-to-show-btn {
 
+}
 
 
 

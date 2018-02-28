@@ -21,6 +21,11 @@ export class ComputerService {
   private updateIntroducedUrl =   'http://127.0.0.1:8080/computer-database/update-introduced';
   private updateDiscontinuedUrl = 'http://127.0.0.1:8080/computer-database/update-discontinued';
   private updateCompanyUrl =      'http://127.0.0.1:8080/computer-database/update-company';
+  private getComputersFilterUrl = 'http://127.0.0.1:8080/computer-database/find-computer-pagination-filter';
+  private getCountFilterUrl =     'http://127.0.0.1:8080/computer-database/count-computer-filter';
+  private registerUrl =           'http://127.0.0.1:8080/computer-database/register-user';
+  private createCompanyUrl =      'http://127.0.0.1:8080/computer-database/create-company';
+  private deleteCompanyUrl =      'http://127.0.0.1:8080/computer-database/delete-company';
   private  isConnected = false;
 
   constructor(private http: HttpClient) {
@@ -36,6 +41,13 @@ export class ComputerService {
     let headersGetAllComputer = new HttpHeaders();
     headersGetAllComputer = headersGetAllComputer.set('Content-Type', 'text/plain');
     return this.http.get<Computer[]>(`${this.getAllComputerUrl}?order=${params.order}&orderType=${params.orderType}&beginComputerDisplay=${params.beginComputerDisplay}&numberComputerToShow=${params.numberComputerToShow}`,
+      {withCredentials : true, headers: headersGetAllComputer});
+  }
+
+  getAllComputerFilter(params, filter): Observable<Computer[]> {
+    let headersGetAllComputer = new HttpHeaders();
+    headersGetAllComputer = headersGetAllComputer.set('Content-Type', 'text/plain');
+    return this.http.get<Computer[]>(`${this.getComputersFilterUrl}?order=${params.order}&orderType=${params.orderType}&beginComputerDisplay=${params.beginComputerDisplay}&numberComputerToShow=${params.numberComputerToShow}&filterName=${filter.byName}&filterIntroduced=${filter.byIntroduced}&filterDiscontinued=${filter.byDiscontinued}&filterCompany=${filter.byCompany}`,
       {withCredentials : true, headers: headersGetAllComputer});
   }
 
@@ -59,6 +71,13 @@ export class ComputerService {
     let headerGetCount = new HttpHeaders();
     headerGetCount = headerGetCount.set('Content-Type', 'text/plain');
     return this.http.get(this.getCountUrl, {withCredentials : true, headers: headerGetCount});
+  }
+
+  getCountFilter(filter): Observable<any> {
+    let headerGetCount = new HttpHeaders();
+    headerGetCount = headerGetCount.set('Content-Type', 'text/plain');
+    return this.http.get(`${this.getCountFilterUrl}?filterName=${filter.byName}&filterIntroduced=${filter.byIntroduced}&filterDiscontinued=${filter.byDiscontinued}&filterCompany=${filter.byCompany}`
+      , {withCredentials : true, headers: headerGetCount});
   }
 
   getCompanies(): Observable<any> {
@@ -100,7 +119,25 @@ export class ComputerService {
   updateCompany(id: string, companyId: string): Observable<any> {
     let headerUpdateCompany = new HttpHeaders();
     headerUpdateCompany = headerUpdateCompany.set('Content-Type', 'text/plain');
-    return this.http.put(`${this.updateNameUrl}?id=${id}&idCompany=${companyId}`, '',
+    return this.http.put(`${this.updateCompanyUrl}?id=${id}&idCompany=${companyId}`, '',
       {withCredentials: true, headers: headerUpdateCompany});
+  }
+  register(user: User): Observable<any> {
+    let headerRegister = new HttpHeaders();
+    headerRegister = headerRegister.set('Content-Type', 'text/plain');
+    return this.http.post(`${this.registerUrl}?username=${user.username}&email=${user.email}&password=${user.password}`, '',
+      {withCredentials: true, headers: headerRegister});
+  }
+  createCompany(companyName: string): Observable<any> {
+    let headerCreateCompany = new HttpHeaders();
+    headerCreateCompany = headerCreateCompany.set('Content-Type', 'text/plain');
+    return this.http.post(`${this.createCompanyUrl}?name=${companyName}`, '',
+      {withCredentials: true, headers: headerCreateCompany});
+  }
+  deleteCompany(id: string): Observable<any> {
+    let headerDeleteCompany = new HttpHeaders();
+    headerDeleteCompany = headerDeleteCompany.set('Content-Type', 'text/plain');
+    return this.http.delete(`${this.deleteCompanyUrl}?id=${id}`,
+      {withCredentials: true, headers: headerDeleteCompany});
   }
 }

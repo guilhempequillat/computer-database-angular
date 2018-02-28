@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>Delete Company</h2>
+  <form>
+    <label>
+      Company :
+    </label>
+    <br>
+    <select [(ngModel)]="idCompany" name="idCompany">
+      <option *ngFor="let company of listCompany" value="{{company.id}}">
+        {{company.name}}
+      </option>
+    </select><br><br>
+    <input class="btn btn-primary" type="button" value="Delete" (click)="deleteCompany()">
+    or
+    <button class="btn btn-default" type="button" routerLink="/dashboard">Cancel</button>
+  </form>
+</div>

@@ -6,6 +6,8 @@ import {ComputerService} from '../service/app.service';
 import { AddComputerComponent } from '../add-computer/add-computer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UpdateComputerComponent } from '../update-computer/update-computer.component';
+import { DeleteCompanyComponent } from '../delete-company/delete-company.component';
+import { AddCompanyComponent } from '../add-company/add-company.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -15,7 +17,7 @@ import { UpdateComputerComponent } from '../update-computer/update-computer.comp
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [DashboardComponent, AddComputerComponent, UpdateComputerComponent],
+  declarations: [DashboardComponent, AddComputerComponent, UpdateComputerComponent, DeleteCompanyComponent, AddCompanyComponent],
   providers: [ComputerService]
 })
 export class DashboardModule { }

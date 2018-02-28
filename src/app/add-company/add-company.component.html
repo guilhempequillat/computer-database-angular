@@ -1,0 +1,18 @@
+<div class="container">
+  <h2>Add a Company</h2>
+  <form>
+    <fieldset>
+      <div class="form-group">
+        <label for="companyName">Company Name :</label>
+        <input type="text" placeholder="Company Name"
+        name="companyName" id="companyName"
+               class="form-control"
+                [(ngModel)]="companyName">
+      </div>
+    </fieldset>
+    <input type="button" (click)="createCompany()" value="Add" class="btn btn-primary">
+    or
+    <button type="button" class="btn btn-default"
+            routerLink="/dashboard">Cancel</button>
+  </form>
+</div>

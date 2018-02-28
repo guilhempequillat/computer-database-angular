@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     console.log('Test ngOnInit');
     this.loadAComputer(20);
+    this.loginMode = true;
     this.user = new User();
     this.user.username = "" ;
     this.user.password = "" ;
@@ -65,9 +66,11 @@ export class LoginComponent implements OnInit {
   registerModeChange() {
     this.loginMode = false;
   }
-
   onSubmitRegister() {
-
+    this.computerService.register(this.user).subscribe((response: any) => {
+      console.log(response);
+      this.loginMode = true;
+    });
   }
   verifPasswordChange() {
     const inputRePassword = document.getElementById('repassword');
@@ -75,7 +78,6 @@ export class LoginComponent implements OnInit {
       console.log('same');
       inputRePassword.classList.remove('ng-invalid');
       inputRePassword.classList.add('ng-valid');
-
     } else {
       inputRePassword.classList.add('ng-invalid');
       inputRePassword.classList.remove('ng-valid');
