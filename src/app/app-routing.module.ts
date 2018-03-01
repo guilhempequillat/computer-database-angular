@@ -10,6 +10,7 @@ import {AddComputerComponent} from './add-computer/add-computer.component';
 import {UpdateComputerComponent} from './update-computer/update-computer.component';
 import {DeleteCompanyComponent} from './delete-company/delete-company.component';
 import {AddCompanyComponent} from './add-company/add-company.component';
+import {AppModule} from './app.module';
 
 const routes: Routes = [
   {

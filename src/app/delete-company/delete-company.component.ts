@@ -27,7 +27,7 @@ export class DeleteCompanyComponent implements OnInit {
     });
   }
   deleteCompany() {
-    if (this.idCompany != -1) {
+    if (this.idCompany !== '-1') {
       this.computerService.deleteCompany(this.idCompany).subscribe((response: any) => {
         console.log(response);
         this.router.navigate(['/dashboard']);

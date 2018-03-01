@@ -15,7 +15,8 @@ import { AddCompanyComponent } from '../add-company/add-company.component';
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   declarations: [DashboardComponent, AddComputerComponent, UpdateComputerComponent, DeleteCompanyComponent, AddCompanyComponent],
   providers: [ComputerService]

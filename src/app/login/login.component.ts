@@ -3,7 +3,7 @@ import {User} from '../model/user.model';
 import {Computer} from '../model/computer.model';
 import {ComputerService} from '../service/app.service';
 import {ActivatedRoute, Route, Router, RouterLink, RouterModule} from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -16,30 +16,37 @@ export class LoginComponent implements OnInit {
   private user: User;
   private loginMode: boolean;
   private verifPassword: string;
+  private loginForm: FormGroup;
 
   constructor(private computerService: ComputerService,
-              private router: Router) {
-    this.user = new User();
-  }
+              private router: Router) {}
 
   ngOnInit() {
-    console.log('Test ngOnInit');
     this.loadAComputer(20);
     this.loginMode = true;
     this.user = new User();
-    this.user.username = "" ;
-    this.user.password = "" ;
-    this.user.email = "";
-    this.verifPassword = "";
+    this.user.username = '';
+    this.user.password = '';
+    this.user.email = '';
+    this.verifPassword = '';
+
+    this.loginForm = new FormGroup({
+      usernameLogin: new FormControl(),
+      passwordLogin: new FormControl()
+    });
+    console.log(this.loginForm.controls.usernameLogin.value);
   }
 
   performLogin() {
+    this.user.username = this.loginForm.controls.usernameLogin.value;
+    this.user.password = this.loginForm.controls.passwordLogin.value;
+    console.log(this.user);
     this.computerService.performLogin(this.user)
       .then(() => this.callbackLogin());
     console.log(this.computerService.getIsConnected());
   }
 
-  public callbackLogin(): void {
+  callbackLogin(): void {
     console.log(this.computerService.getIsConnected());
     if (this.computerService.getIsConnected()) {
       this.router.navigate(['/dashboard']);
