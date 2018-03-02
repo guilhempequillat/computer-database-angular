@@ -4,7 +4,6 @@ import { LoginComponent } from './login.component';
 import {RouterModule} from '@angular/router';
 import {ComputerService} from '../service/app.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AppModule} from '../app.module';
 import {ShowErrorComponent} from '../show-error/show-error.component';
 
 
@@ -15,7 +14,7 @@ import {ShowErrorComponent} from '../show-error/show-error.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [LoginComponent, ShowErrorComponent],
+  declarations: [LoginComponent,ShowErrorComponent],
   providers: [ComputerService]
 })
 export class LoginModule { }
