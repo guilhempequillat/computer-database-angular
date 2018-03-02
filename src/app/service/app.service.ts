@@ -10,7 +10,7 @@ import {Company} from '../model/company.model';
 @Injectable()
 export class ComputerService {
 
-  private getAComputerUrl =       'http://127.0.0.1:8080/computer-database/find-a-computer';
+  private getComputerUrl =       'http://127.0.0.1:8080/computer-database/find-a-computer';
   private getAllComputerUrl =     'http://127.0.0.1:8080/computer-database/find-computer-pagination';
   private performLoginUrl =       'http://127.0.0.1:8080/computer-database/perform-login';
   private getCountUrl =           'http://127.0.0.1:8080/computer-database/count-computer';
@@ -31,10 +31,10 @@ export class ComputerService {
   constructor(private http: HttpClient) {
   }
 
-  getAComputer(id: number): Observable<Computer> {
+  getComputer(id: number): Observable<Computer> {
     let headersGetAComputer = new HttpHeaders();
     headersGetAComputer = headersGetAComputer.set('Content-Type', 'text/plain');
-    return this.http.get<Computer>(`${this.getAComputerUrl}/${id}`,{withCredentials : true, headers : headersGetAComputer });
+    return this.http.get<Computer>(`${this.getComputerUrl}/${id}`,{withCredentials : true, headers : headersGetAComputer });
   }
 
   getAllComputer(params): Observable<Computer[]> {

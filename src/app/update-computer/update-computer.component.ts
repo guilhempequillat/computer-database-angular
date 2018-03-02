@@ -43,7 +43,7 @@ export class UpdateComputerComponent implements OnInit {
   }
 
   loadComputerToUpdate(id) {
-    this.computerSerivce.getAComputer(id).subscribe((computer: Computer) => {
+    this.computerSerivce.getComputer(id).subscribe((computer: Computer) => {
       this.computer = computer;
       if (this.computer.introduced != null) {
         const introducedMonth = this.computer.introduced.monthValue < 10 ?

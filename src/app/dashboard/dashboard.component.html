@@ -1,27 +1,46 @@
 
-<div class="container">
-  <h2>Dashboard</h2>
+<mat-card class="container">
+  <mat-card-title>Dashboard</mat-card-title>
   <h3 *ngIf="count" >{{count}} computers found !</h3>
-  <div>
-    <button routerLink="/add-computer">Add Computer</button>
-    <button routerLink="/add-company">Add Company</button>
-    <button (click)="changeDeleteMode()">Delete Computer</button>
-    <button routerLink="/delete-company">Delete Company</button>
-    <button (click)="toggleUseFilter()">Filter</button>
-
+  <div class="navigation-dashboard">
+    <button mat-button routerLink="/add-computer">Add Computer</button>
+    <button mat-button routerLink="/add-company">Add Company</button>
+    <button mat-button (click)="changeDeleteMode()">Delete Computer</button>
+    <button mat-button routerLink="/delete-company">Delete Company</button>
+    <button mat-button (click)="toggleUseFilter()">Filter</button>
   </div>
-  <form *ngIf="pagination.userFilter">
-    <label>By Name : </label>
-    <input type="text" [(ngModel)]="filter.byName" name="byName"><br>
-    <label>By Introduced : </label>
-    <input type="text" [(ngModel)]="filter.byIntroduced" name="byIntroduced"><br>
-    <label>By Discontinued : </label>
-    <input type="text" [(ngModel)]="filter.byDiscontinued" name="byDiscontinued"><br>
-    <label>By Company : </label>
-    <input type="text" [(ngModel)]="filter.byCompany" name="byCompany"><br>
-    <button type="button" (click)="applyFilter()">Apply Filter</button>
+  <form *ngIf="pagination.userFilter" class="form-style">
+    <mat-form-field class="full-width">
+      <input matInput
+             type="text"
+             [(ngModel)]="filter.byName"
+             placeholder="By Name"
+             name="byName"/>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput
+             type="text"
+             [(ngModel)]="filter.byIntroduced"
+             placeholder="By Introduced"
+             name="byIntroduced"/>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput
+             type="text"
+             [(ngModel)]="filter.byDiscontinued"
+             placeholder="By Discontinued"
+             name="byDiscontinued"/>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+    <input matInput
+           type="text"
+           [(ngModel)]="filter.byCompany"
+           placeholder="By Company"
+           name="byCompany"/>
+    </mat-form-field>
+    <button mat-button type="button" class="btn-filter" (click)="applyFilter()">Apply Filter</button>
   </form>
-  <table class="table table-striped table-dark" >
+  <table class="table table-striped" >
     <thead class="thead-dark">
       <tr class="title-table">
         <td *ngIf="deleteMode">
@@ -59,7 +78,7 @@
       </td>
     </tr>
   </table>
-</div>
+</mat-card>
   <footer>
     <div class="btn-group nav-button-group">
       <button class="btn btn-primary nav-button" *ngIf="pagination.beginComputerDisplay != 0" (click)="updateNavBarDecrement()">

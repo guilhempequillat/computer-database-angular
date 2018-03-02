@@ -6,9 +6,7 @@ import { ComputerService } from './service/app.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
-import { HeaderComponent } from './header/header.component';
 import {HeaderModule} from './header/header.module';
-import { ShowErrorComponent } from './show-error/show-error.component';
 
 
 @NgModule({
@@ -21,7 +19,7 @@ import { ShowErrorComponent } from './show-error/show-error.component';
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
-    HeaderModule
+    HeaderModule,
   ],
   providers: [ComputerService],
   bootstrap: [AppComponent]

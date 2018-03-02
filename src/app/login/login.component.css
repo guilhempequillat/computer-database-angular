@@ -14,18 +14,4 @@
   margin-bottom: 20px;
 }
 
-.login-choise:hover,
-.login-choise:focus,
-.login-choise :active {
-  background-color: rgb(80,80,80);
-  border-color: rgb(70,70,70);
-  color: white;
-}
 
-.ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid #42A948; /* green */
-}
-
-.ng-invalid:not(form)  {
-  border-left: 5px solid #a94442; /* red */
-}

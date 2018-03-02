@@ -8,15 +8,37 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UpdateComputerComponent } from '../update-computer/update-computer.component';
 import { DeleteCompanyComponent } from '../delete-company/delete-company.component';
 import { AddCompanyComponent } from '../add-company/add-company.component';
+import {
+  MatButtonModule, MatCardModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatSelectModule, MatTableModule,
+  MatTabsModule
+} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MaterialModule} from '../material/material.module';
 
 @NgModule({
-  exports: [RouterModule],
+  exports: [RouterModule,
+    MatInputModule,
+    MatTabsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-
+    MaterialModule,
+    MatTabsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule
   ],
   declarations: [DashboardComponent, AddComputerComponent, UpdateComputerComponent, DeleteCompanyComponent, AddCompanyComponent],
   providers: [ComputerService]

@@ -31,7 +31,10 @@ export class LoginComponent implements OnInit {
     this.verifPassword = '';
 
     this.loginForm = new FormGroup({
-      usernameLogin: new FormControl(),
+      usernameLogin: new FormControl('',{
+         validators: Validators.required,
+        }
+      ),
       passwordLogin: new FormControl()
     });
     console.log(this.loginForm.controls.usernameLogin.value);
@@ -54,7 +57,7 @@ export class LoginComponent implements OnInit {
   }
 
   loadAComputer(id: number) {
-    this.computerService.getAComputer(id).subscribe(
+    this.computerService.getComputer(id).subscribe(
       (computer: Computer) => {
         this.computer = computer;
         console.log(computer);
@@ -79,7 +82,7 @@ export class LoginComponent implements OnInit {
       this.loginMode = true;
     });
   }
-  verifPasswordChange() {
+  /*verifPasswordChange() {
     const inputRePassword = document.getElementById('repassword');
     if (this.user.password === this.verifPassword) {
       console.log('same');
@@ -89,5 +92,5 @@ export class LoginComponent implements OnInit {
       inputRePassword.classList.add('ng-invalid');
       inputRePassword.classList.remove('ng-valid');
     }
-  }
+  }*/
 }

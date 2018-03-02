@@ -1,66 +1,70 @@
-<div class="container">
-  <div class="col-xs-12 btn-group">
-    <button type="button" class="btn login-choise"
-    (click)="loginModeChange()">Login</button>
-    <button type="button" class="btn login-choise"
-    (click)="registerModeChange()">Register</button>
-  </div>
 
-
-  <div *ngIf="loginMode" id="login-div">
-    <h2>Login</h2><br>
-    <form id='connection-form' (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-      <div class='form-group'>
-        <label for="usernameLogin">User Name</label>
-        <input type="text" class="form-control" id="usernameLogin"
-               required
-               name="usernameLogin"
-               formControlName="usernameLogin"/>
-      </div>
-      <show-errors [control]="loginForm.controls.usernameLogin"></show-errors>
-      <div class='form-group'>
-        <label for="passwordLogin">Password</label>
-        <input type="password" class="form-control" id="passwordLogin"
-               name="passwordLogin"
-               required value=""
-               formControlName="passwordLogin"/>
-      </div>
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-  </div>
-
-
-  <div *ngIf="!loginMode" id="registerDiv">
-    <form id='register-form' (ngSubmit)="onSubmitRegister()">
-      <h2>Register</h2><br>
-      <div class='form-group'>
-        <label for="usernameRegister">User Name</label>
-        <input type="text" class="form-control" id="usernameRegister"
-               required [minlength]="5"
-               name="username"
-               [(ngModel)]="user.username">
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder=""
-               required email="true" [minlength]="5"
-               [(ngModel)]="user.email">
-      </div>
-      <div class="form-group">
-      <label for="passwordRegister">Confirm Password</label>
-      <input type="password" class="form-control" id="passwordRegister" name="passwordRegister" placeholder=""
-             required [minlength]="5"
-             [(ngModel)]="user.password"
-             (change)="verifPasswordChange()">
-    </div>
-      <div class="form-group">
-        <label for="repassword">Password</label>
-        <input type="password" class="form-control ng-invalid ng-touched" id="repassword" name="repassword" placeholder=""
-               [(ngModel)]="verifPassword"
-               required [minlength]="5" value=""
-               (change)="verifPasswordChange()">
-      </div>
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-  </div>
-</div>
+<mat-card class="container section-interface">
+  <mat-tab-group>
+      <mat-tab label="Login">
+        <mat-card-title>
+          Login
+        </mat-card-title>
+        <form id='connection-form' class="form-style" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+          <mat-form-field class="full-width">
+            <input id="usernameLogin"
+                   name="usernameLogin"
+                   matInput
+                   placeholder="User Name"
+                   formControlName="usernameLogin"/>
+          </mat-form-field>
+          <show-errors [control]="loginForm.controls.usernameLogin"></show-errors>
+          <mat-form-field class="full-width">
+            <input type="password" id="passwordLogin"
+                   name="passwordLogin"
+                   required value=""
+                   formControlName="passwordLogin"
+                   matInput
+                   placeholder="Password"/>
+          </mat-form-field>
+          <button mat-button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </mat-tab>
+      <mat-tab label="Register">
+        <form id='register-form' class="form-style" (ngSubmit)="onSubmitRegister()">
+          <mat-card-title>
+            Register
+          </mat-card-title>
+          <mat-form-field class="full-width">
+            <input type="text" id="usernameRegister"
+                   placeholder="User Name"
+                   required
+                   matInput
+                   name="username"
+                   [(ngModel)]="user.username"/>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input type="email"
+                   matInput
+                   id="email"
+                   name="email"
+                   placeholder="Email"
+                   required email="true" [minlength]="5"
+                   [(ngModel)]="user.email"/>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input type="password"  id="passwordRegister" name="passwordRegister"
+                   matInput
+                   required [minlength]="5"
+                   [(ngModel)]="user.password"
+                   placeholder="Password"
+                   (change)="verifPasswordChange()"/>
+          </mat-form-field>
+          <mat-form-field class="form-group">
+            <input type="password" id="repassword"
+                   name="repassword" placeholder="Confirm Password"
+                   [(ngModel)]="verifPassword"
+                   matInput
+                   required [minlength]="5" value=""
+                   (change)="verifPasswordChange()"/>
+          </mat-form-field>
+          <button mat-button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

@@ -61,9 +61,19 @@ footer {
   color: white;
 }
 
-.nb-computer-to-show-btn {
-
+.navigation-dashboard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  button {
+    background-color: #FAFAFA;
+    width: 100%;
+  }
 }
 
+.btn-filter {
+  background-color: #FAFAFA;
+}
 
 

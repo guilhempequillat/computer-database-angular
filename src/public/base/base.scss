@@ -1,0 +1,25 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+.background-body {
+  background-color: #DADBDB;
+}
+
+.section-interface {
+  padding-top: 20px;
+  background-color: #e6e6e6;
+  color: black;
+  padding-bottom: 20px;
+  border-radius: 10px;
+}
+
+full-width {
+  width: 100%;
+}
+
+#usernameLogin{
+  width: 100%;
+}
+
+.form-style {
+  display: flex;
+  flex-direction: column;
+}

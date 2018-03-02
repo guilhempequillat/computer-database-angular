@@ -42,7 +42,7 @@ export class AppComponent implements OnInit{
   }
 
   loadAComputer(id: number) {
-    this.computerService.getAComputer(id).subscribe(
+    this.computerService.getComputer(id).subscribe(
       (computer: Computer) => {
         this.computer = computer;
         console.log(computer);
