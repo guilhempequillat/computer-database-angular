@@ -1,17 +1,14 @@
 <div class="container section-interface">
-  <h2>Delete Company</h2>
-  <form>
-    <label>
-      Company :
-    </label>
-    <br>
-    <select [(ngModel)]="idCompany" name="idCompany">
-      <option *ngFor="let company of listCompany" value="{{company.id}}">
+  <mat-card-title>Delete Company</mat-card-title>
+  <form class="form-style">
+    <mat-select [(ngModel)]="idCompany" name="idCompany" placeholder="Company">
+      <mat-option *ngFor="let company of listCompany" value="{{company.id}}">
         {{company.name}}
-      </option>
-    </select><br><br>
+      </mat-option>
+    </mat-select>
+    <div class="full-width">
     <input class="btn btn-primary" type="button" value="Delete" (click)="deleteCompany()">
-    or
     <button class="btn btn-default" type="button" routerLink="/dashboard">Cancel</button>
+    </div>
   </form>
 </div>

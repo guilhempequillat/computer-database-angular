@@ -1,18 +1,17 @@
-<div class="container section-interface">
-  <h2>Add a Company</h2>
-  <form>
-    <fieldset>
-      <div class="form-group">
-        <label for="companyName">Company Name :</label>
-        <input type="text" placeholder="Company Name"
-        name="companyName" id="companyName"
-               class="form-control"
-                [(ngModel)]="companyName">
-      </div>
-    </fieldset>
+<mat-card class="container section-interface">
+  <mat-card-title>Add a Company</mat-card-title>
+  <form class="form-style">
+        <mat-form-field class="full-width">
+          <input type="text" placeholder="Company Name"
+                 name="companyName"
+                 id="companyName"
+                 [(ngModel)]="companyName"
+                 matInput>
+        </mat-form-field>
+  <div class="">
     <input type="button" (click)="createCompany()" value="Add" class="btn btn-primary">
-    or
     <button type="button" class="btn btn-default"
             routerLink="/dashboard">Cancel</button>
+  </div>
   </form>
-</div>
+</mat-card>

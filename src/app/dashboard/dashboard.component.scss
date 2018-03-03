@@ -16,12 +16,26 @@
   border-width: 1px;
 }
 
-td {
-  border-top-color: rgb(0,0,0);
-  border-color: black;
-  border-style: solid;
-  border-width: 1px;
-  padding: 5px;
+.table-case {
+  td {
+    border-bottom-color: black;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding: 10px;
+    background-color: white;
+    width: 25%;
+  }
+  .name-computer-table {
+    cursor: pointer;
+    transition-duration: 0.8s;
+    transition-property: background-color color;
+
+  }
+  .name-computer-table:hover {
+    cursor: pointer;
+    background-color: rgb(150,150,150);
+    color: white;
+  }
 }
 
 .nav-button {
@@ -31,6 +45,7 @@ td {
   width: 42px;
   height: 35px;
   justify-content: center;
+  padding: 0px;
 }
 
 footer {
@@ -42,24 +57,8 @@ footer {
   display: flex;
 }
 
-.container {
-  background-color: rgb(230,230,230);
-  border-radius: 10px;
-  margin-bottom: 60px;
-  padding-bottom: 15px;
-}
 
-.name-computer-table {
-  cursor: pointer;
-  transition-duration: 0.8s;
-  transition-property: background-color color;
 
-}
-.name-computer-table:hover {
-  cursor: pointer;
-  background-color: rgb(150,150,150);
-  color: white;
-}
 
 .navigation-dashboard {
   display: flex;
@@ -67,7 +66,7 @@ footer {
   align-items: center;
   width: 100%;
   button {
-    background-color: #FAFAFA;
+    background-color: #EEEEEE;
     width: 100%;
   }
 }

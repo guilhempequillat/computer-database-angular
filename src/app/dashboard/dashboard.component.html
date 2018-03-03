@@ -1,7 +1,7 @@
 
-<mat-card class="container">
+<mat-card class="container section-interface">
   <mat-card-title>Dashboard</mat-card-title>
-  <h3 *ngIf="count" >{{count}} computers found !</h3>
+  <p *ngIf="count" >{{count}} computers found</p>
   <div class="navigation-dashboard">
     <button mat-button routerLink="/add-computer">Add Computer</button>
     <button mat-button routerLink="/add-company">Add Company</button>
@@ -41,18 +41,18 @@
     <button mat-button type="button" class="btn-filter" (click)="applyFilter()">Apply Filter</button>
   </form>
   <table class="table table-striped" >
-    <thead class="thead-dark">
+    <thead class="">
       <tr class="title-table">
         <td *ngIf="deleteMode">
           <button (click)="confirmDelete()"  class="btn btn-danger">Trash</button>
         </td>
-        <td (click)="changeOrderType('name')">Name</td>
-        <td (click)="changeOrderType('introduced')">Introduced</td>
-        <td (click)="changeOrderType('discontinued')">Discontinued</td>
-        <td (click)="changeOrderType('company')">Company</td>
+        <td (click)="changeOrderType('name')"  matTooltip="Order By Name">Name</td>
+        <td (click)="changeOrderType('introduced')"  matTooltip="Order By Introduced">Introduced</td>
+        <td (click)="changeOrderType('discontinued')"  matTooltip="Order By Discontinued">Discontinued</td>
+        <td (click)="changeOrderType('company')"  matTooltip="Order By Company">Company</td>
       </tr>
     </thead>
-    <tr *ngFor="let computer of listComputer; let j = index">
+    <tr *ngFor="let computer of listComputer; let j = index" class="table-case">
       <td *ngIf="deleteMode">
         <input type="checkbox" (click)="getComputerIdToDelete()"
                value="{{computer.id}}"
@@ -92,7 +92,7 @@
         <span class="glyphicon glyphicon-triangle-right"></span>
       </button>
     </div>
-    <div class="nb-computer-to-show">
+    <div class="nb-computer-to-show btn-group nav-button-group">
       <button class="btn btn-primary nb-computer-to-show-btn" (click)="updateNbComputerToShow(10)">
         <span>10</span>
       </button>

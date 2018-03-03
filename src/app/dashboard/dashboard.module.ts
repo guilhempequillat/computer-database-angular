@@ -9,8 +9,9 @@ import { UpdateComputerComponent } from '../update-computer/update-computer.comp
 import { DeleteCompanyComponent } from '../delete-company/delete-company.component';
 import { AddCompanyComponent } from '../add-company/add-company.component';
 import {
-  MatButtonModule, MatCardModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatSelectModule, MatTableModule,
-  MatTabsModule
+  MatButtonModule, MatCardModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatSelectModule,
+  MatTableModule,
+  MatTabsModule, MatTooltipModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from '../material/material.module';
@@ -24,7 +25,8 @@ import {MaterialModule} from '../material/material.module';
     MatTableModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule],
+    MatSelectModule,
+    MatTooltipModule],
   imports: [
     CommonModule,
     RouterModule,
@@ -38,7 +40,8 @@ import {MaterialModule} from '../material/material.module';
     MatTableModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
   ],
   declarations: [DashboardComponent, AddComputerComponent, UpdateComputerComponent, DeleteCompanyComponent, AddCompanyComponent],
   providers: [ComputerService]
