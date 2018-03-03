@@ -10,22 +10,23 @@ import {Company} from '../model/company.model';
 @Injectable()
 export class ComputerService {
 
-  private getComputerUrl =       'http://127.0.0.1:8080/computer-database/find-a-computer';
-  private getAllComputerUrl =     'http://127.0.0.1:8080/computer-database/find-computer-pagination';
-  private performLoginUrl =       'http://127.0.0.1:8080/computer-database/perform-login';
-  private getCountUrl =           'http://127.0.0.1:8080/computer-database/count-computer';
-  private getCompaniesUrl =       'http://127.0.0.1:8080/computer-database/find-all-companies';
-  private postCreateComptuerUrl = 'http://127.0.0.1:8080/computer-database/create-computer';
-  private deleteComputerUrl =     'http://127.0.0.1:8080/computer-database/delete-computer';
-  private updateNameUrl =         'http://127.0.0.1:8080/computer-database/update-name';
-  private updateIntroducedUrl =   'http://127.0.0.1:8080/computer-database/update-introduced';
-  private updateDiscontinuedUrl = 'http://127.0.0.1:8080/computer-database/update-discontinued';
-  private updateCompanyUrl =      'http://127.0.0.1:8080/computer-database/update-company';
-  private getComputersFilterUrl = 'http://127.0.0.1:8080/computer-database/find-computer-pagination-filter';
-  private getCountFilterUrl =     'http://127.0.0.1:8080/computer-database/count-computer-filter';
-  private registerUrl =           'http://127.0.0.1:8080/computer-database/register-user';
-  private createCompanyUrl =      'http://127.0.0.1:8080/computer-database/create-company';
-  private deleteCompanyUrl =      'http://127.0.0.1:8080/computer-database/delete-company';
+  private sourceUrl =             'http://127.0.0.1:8080/module-webapp';
+  private getComputerUrl =        this.sourceUrl + '/find-a-computer';
+  private getAllComputerUrl =     this.sourceUrl + '/find-computer-pagination';
+  private performLoginUrl =       this.sourceUrl + '/perform-login';
+  private getCountUrl =           this.sourceUrl + '/count-computer';
+  private getCompaniesUrl =       this.sourceUrl + '/find-all-companies';
+  private postCreateComptuerUrl = this.sourceUrl + '/create-computer';
+  private deleteComputerUrl =     this.sourceUrl + '/delete-computer';
+  private updateNameUrl =         this.sourceUrl + '/update-name';
+  private updateIntroducedUrl =   this.sourceUrl + '/update-introduced';
+  private updateDiscontinuedUrl = this.sourceUrl + '/update-discontinued';
+  private updateCompanyUrl =      this.sourceUrl + '/update-company';
+  private getComputersFilterUrl = this.sourceUrl + '/find-computer-pagination-filter';
+  private getCountFilterUrl =     this.sourceUrl + '/count-computer-filter';
+  private registerUrl =           this.sourceUrl + '/register-user';
+  private createCompanyUrl =      this.sourceUrl + '/create-company';
+  private deleteCompanyUrl =      this.sourceUrl + '/delete-company';
   private  isConnected = false;
 
   constructor(private http: HttpClient) {
