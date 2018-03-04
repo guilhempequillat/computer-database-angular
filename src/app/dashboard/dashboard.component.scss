@@ -38,14 +38,25 @@
   }
 }
 
-.nav-button {
+.nav-button, .nb-computer-to-show-btn{
   display: flex;
   align-item: center;
   font-size: 15px;
   width: 42px;
   height: 35px;
   justify-content: center;
+  background-color: #DEDEDE;
   padding: 0px;
+  border: solid;
+  border-color: #CECECE;
+  border-width:1px ;
+}
+
+.nb-computer-to-show {
+  margin-left: 10px;
+}
+.nav-button-group {
+  display: flex;
 }
 
 footer {

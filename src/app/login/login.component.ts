@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../model/user.model';
 import {Computer} from '../model/computer.model';
 import {ComputerService} from '../service/app.service';
-import {ActivatedRoute, Route, Router, RouterLink, RouterModule} from '@angular/router';
-import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import {Router} from '@angular/router';
+import {FormGroup, Validators, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   private loginMode: boolean;
   private verifPassword: string;
   private loginForm: FormGroup;
+  private registerForm: FormGroup;
 
   constructor(private computerService: ComputerService,
               private router: Router) {}
@@ -32,21 +33,59 @@ export class LoginComponent implements OnInit {
 
     this.loginForm = new FormGroup({
       usernameLogin: new FormControl('',{
-         validators: Validators.required,
+         validators: [
+            Validators.required,
+            Validators.minLength(5)]
         }
       ),
-      passwordLogin: new FormControl()
+      passwordLogin: new FormControl('',{
+        validators: [
+            Validators.required,
+            Validators.minLength(5)
+        ],
+      })
     });
-    console.log(this.loginForm.controls.usernameLogin.value);
+
+    const pattern = '\\w{0,15}';
+
+    this.registerForm = new FormGroup( {
+      usernameRegister: new FormControl( '', {
+        validators: [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.pattern(pattern)
+        ]
+      }),
+      emailRegister: new FormControl( '', {
+        validators: [
+          Validators.required,
+          Validators.email,
+        ]
+      }),
+      passwordRegister: new FormControl( '', {
+        validators: [
+            Validators.required,
+            Validators.pattern(pattern)
+        ]
+      }),
+      confirmPasswordRegister: new FormControl( '', {
+        validators: [
+          Validators.required
+        ]
+      })
+    });
   }
 
   performLogin() {
-    this.user.username = this.loginForm.controls.usernameLogin.value;
-    this.user.password = this.loginForm.controls.passwordLogin.value;
-    console.log(this.user);
-    this.computerService.performLogin(this.user)
-      .then(() => this.callbackLogin());
-    console.log(this.computerService.getIsConnected());
+    console.log(this.loginForm.invalid);
+    if(!this.loginForm.invalid){
+      this.user.username = this.loginForm.controls.usernameLogin.value;
+      this.user.password = this.loginForm.controls.passwordLogin.value;
+      console.log(this.user);
+      this.computerService.performLogin(this.user)
+        .then(() => this.callbackLogin());
+      console.log(this.computerService.getIsConnected());
+    }
   }
 
   callbackLogin(): void {
@@ -67,30 +106,41 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
   onSubmit() {
     this.performLogin();
   }
+
   loginModeChange() {
     this.loginMode = true;
   }
+
   registerModeChange() {
     this.loginMode = false;
   }
+
   onSubmitRegister() {
-    this.computerService.register(this.user).subscribe((response: any) => {
-      console.log(response);
-      this.loginMode = true;
-    });
-  }
-  /*verifPasswordChange() {
-    const inputRePassword = document.getElementById('repassword');
-    if (this.user.password === this.verifPassword) {
-      console.log('same');
-      inputRePassword.classList.remove('ng-invalid');
-      inputRePassword.classList.add('ng-valid');
+    if(!this.registerForm.invalid && this.registerForm.controls.passwordRegister.value === this.registerForm.controls.confirmPasswordRegister.value){
+
+      this.registerUserCreation();
+
+      this.computerService.register(this.user).subscribe((response: any) => {
+        console.log(response);
+        this.loginMode = true;
+      }, (error: any) {
+        console.error(error);
+      });
+    }else if(this.registerForm.controls.passwordRegister.value != this.registerForm.controls.confirmPasswordRegister.value){
+      console.log("Password confirmation not valide");
     } else {
-      inputRePassword.classList.add('ng-invalid');
-      inputRePassword.classList.remove('ng-valid');
+      console.log("Form not valid");
     }
-  }*/
+
+  }
+
+  registerUserCreation() {
+    this.user.email = this.registerForm.controls.emailRegister.value;
+    this.user.password = this.registerForm.controls.passwordRegister.value;
+    this.user.username = this.registerForm.controls.usernameRegister.value;
+  }
 }

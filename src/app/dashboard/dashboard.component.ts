@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   private count: number;
   private deleteMode: boolean;
   private listComputerToDelete: string[];
+  private nbNavProp = 6;
 
   private pagination = {
     order: 'ASC',
@@ -162,18 +163,18 @@ export class DashboardComponent implements OnInit {
     const courantPage = this.pagination.beginComputerDisplay / this.pagination.numberComputerToShow;
     const nbPagesAfter = Math.ceil(this.count / this.pagination.numberComputerToShow - courantPage);
 
-    const nbSuggestedPagesAfter = nbPagesAfter < 5 ? nbPagesAfter : 5;
-    const nbSuggestedPagesBefore = courantPage < 5 ? courantPage : 5;
+    const nbSuggestedPagesAfter = nbPagesAfter < this.nbNavProp/2 ? nbPagesAfter : this.nbNavProp/2;
+    const nbSuggestedPagesBefore = courantPage < this.nbNavProp/2 ? courantPage : this.nbNavProp/2;
     const totalLenght = nbSuggestedPagesBefore + nbSuggestedPagesAfter;
 
-    if (nbSuggestedPagesBefore < 5) { //Case at the begining
-      const nbSuggestedPagesAfterBegining = nbSuggestedPagesBefore + nbPagesAfter > 10 ? 10 - nbSuggestedPagesBefore : nbPagesAfter;
+    if (nbSuggestedPagesBefore < this.nbNavProp/2) { //Case at the begining
+      const nbSuggestedPagesAfterBegining = nbSuggestedPagesBefore + nbPagesAfter > this.nbNavProp ? this.nbNavProp - nbSuggestedPagesBefore : nbPagesAfter;
       this.navArray = new Array(nbSuggestedPagesBefore + nbSuggestedPagesAfterBegining);
       for (let i = 0; i < this.navArray.length; i++) {
         this.navArray[i] = i + courantPage - nbSuggestedPagesBefore;
       }
-    } else if ( nbSuggestedPagesAfter < 5 ) {//Case at the end
-      const nbSuggestedPagesBeforeEnd = nbSuggestedPagesAfter + courantPage > 10 ? 10 - nbSuggestedPagesAfter : courantPage;
+    } else if ( nbSuggestedPagesAfter < this.nbNavProp/2 ) {//Case at the end
+      const nbSuggestedPagesBeforeEnd = nbSuggestedPagesAfter + courantPage > this.nbNavProp ? this.nbNavProp - nbSuggestedPagesAfter : courantPage;
       this.navArray = new Array(nbSuggestedPagesAfter + nbSuggestedPagesBeforeEnd);
       for (let i = 0; i < this.navArray.length; i++) {
         this.navArray[i] = i + courantPage - nbSuggestedPagesBeforeEnd;

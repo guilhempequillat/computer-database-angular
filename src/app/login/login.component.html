@@ -17,52 +17,53 @@
           <mat-form-field class="full-width">
             <input type="password" id="passwordLogin"
                    name="passwordLogin"
-                   required value=""
-                   formControlName="passwordLogin"
                    matInput
-                   placeholder="Password"/>
+                   placeholder="Password"
+                   formControlName="passwordLogin"/>
           </mat-form-field>
+          <show-errors [control]="loginForm.controls.passwordLogin"></show-errors>
           <button mat-button type="submit" class="btn btn-success">Submit</button>
         </form>
       </mat-tab>
       <mat-tab label="Register">
-        <form id='register-form' class="form-style" (ngSubmit)="onSubmitRegister()">
+        <form id='register-form' class="form-style" (ngSubmit)="onSubmitRegister()" [formGroup]="registerForm">
           <mat-card-title>
             Register
           </mat-card-title>
           <mat-form-field class="full-width">
             <input type="text" id="usernameRegister"
                    placeholder="User Name"
-                   required
                    matInput
                    name="username"
-                   [(ngModel)]="user.username"/>
+                   formControlName="usernameRegister"/>
           </mat-form-field>
+          <show-errors [control]="registerForm.controls.usernameRegister"></show-errors>
           <mat-form-field class="full-width">
-            <input type="email"
-                   matInput
+            <input matInput
                    id="email"
                    name="email"
                    placeholder="Email"
-                   required email="true" [minlength]="5"
-                   [(ngModel)]="user.email"/>
+                   formControlName="emailRegister"/>
           </mat-form-field>
+          <show-errors [control]="registerForm.controls.emailRegister"></show-errors>
           <mat-form-field class="full-width">
-            <input type="password"  id="passwordRegister" name="passwordRegister"
+            <input type="password"
+                   id="passwordRegister"
+                   name="passwordRegister"
                    matInput
-                   required [minlength]="5"
-                   [(ngModel)]="user.password"
                    placeholder="Password"
-                   (change)="verifPasswordChange()"/>
+                   formControlName="passwordRegister"/>
           </mat-form-field>
+          <show-errors [control]="registerForm.controls.passwordRegister"></show-errors>
           <mat-form-field class="form-group">
-            <input type="password" id="repassword"
-                   name="repassword" placeholder="Confirm Password"
-                   [(ngModel)]="verifPassword"
+            <input type="password"
+                   id="repassword"
+                   name="repassword"
+                   placeholder="Confirm Password"
                    matInput
-                   required [minlength]="5" value=""
-                   (change)="verifPasswordChange()"/>
+                   formControlName="confirmPasswordRegister"/>
           </mat-form-field>
+          <show-errors [control]="registerForm.controls.confirmPasswordRegister"></show-errors>
           <button mat-button type="submit" class="btn btn-success">Submit</button>
         </form>
     </mat-tab>

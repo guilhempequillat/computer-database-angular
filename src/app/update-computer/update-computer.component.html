@@ -1,44 +1,33 @@
-<div class="container section-interface">
-  <h2>Update a computer</h2>
-  <form (ngSubmit)="onSubmit()" *ngIf="computer" [formGroup]="updateForm">
-    <input type="hidden" value="0" id="id"/> <!-- TODO: Change this value with the computer id -->
-    <fieldset>
-      <div class="form-group">
-        <label for="computerName">Computer name</label>
-        <input type="text" class="form-control" id="computerName"
-               value="{{computer.name}}" name="computerName"
-               formControlName="name">
-      </div>
-
-      <div class="form-group">
-        <label for="introduced">Introduced</label>
-        <input type="date" class="form-control" id="introduced" placeholder="Introduced"
-               value="{{introduced}}" formControlName="introduced"
-               name="introduced">
-      </div>
-
-      <div class="form-group">
-        <label for="discontinued">Discontinued</label>
-        <input type="date" class="form-control" id="discontinued" placeholder="Discontinued"
-               value="{{discontinued}}" formControlName="discontinued"
-               name="discontinued">
-      </div>
-
-      <div class="form-group">
-        <label for="companyId">Company</label>
-        <select class="form-control" id="companyId" name="companyId" formControlName="companyId">
-          <option *ngFor="let company of listCompany"
-                  value="{{company.id}}"
-                  [selected]="company.id<10">
-            {{company.name}}
-          </option>
-        </select>
-      </div>
-    </fieldset>
+<mat-card class="container section-interface">
+  <mat-card-title>Update a computer</mat-card-title>
+  <form (ngSubmit)="onSubmit()" *ngIf="computer" class="form-style" [formGroup]="updateForm">
+    <mat-form-field>
+      <input type="text" id="computerName"
+             value="{{computer.name}}" name="computerName"
+             placeholder="name"
+             formControlName="name" matInput/>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="date" id="introduced" placeholder="Introduced"
+             value="{{introduced}}" formControlName="introduced"
+             name="introduced" matInput/>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="date" id="discontinued" placeholder="Discontinued"
+             value="{{discontinued}}" formControlName="discontinued"
+             name="discontinued" matInput/>
+    </mat-form-field>
+    <mat-select id="companyId" name="companyId" formControlName="companyId">
+      <mat-option *ngFor="let company of listCompany"
+              value="{{company.id}}"
+              placeholder="Company">
+        {{company.name}}
+      </mat-option>
+    </mat-select>
     <div class="actions pull-right">
       <input type="submit" value="Edit" class="btn btn-primary">
       Or
-      <a href="dashboard" class="btn btn-default">Cancel</a>
+      <a routerLink="/dashboard" class="btn btn-default">Cancel</a>
     </div>
   </form>
-</div>
+</mat-card>

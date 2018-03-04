@@ -12,12 +12,13 @@ export class ShowErrorComponent {
     'required': () => 'This field is required',
     'minlength': (params) => 'The min number of characters is ' + params.requiredLength,
     'maxlength': (params) => 'The max allowed number of characters is ' + params.requiredLength,
-    'pattern': (params) => 'The required pattern is: ' + params.requiredPattern,
+    'pattern': (params) => 'The specials characters are not allowed',
     'years': (params) => params.message,
     'countryCity': (params) => params.message,
     'uniqueName': (params) => params.message,
     'telephoneNumbers': (params) => params.message,
-    'telephoneNumber': (params) => params.message
+    'telephoneNumber': (params) => params.message,
+    'email': (params) => 'Email address not valide'
   };
 
   @Input()

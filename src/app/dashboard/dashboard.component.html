@@ -81,25 +81,25 @@
 </mat-card>
   <footer>
     <div class="btn-group nav-button-group">
-      <button class="btn btn-primary nav-button" *ngIf="pagination.beginComputerDisplay != 0" (click)="updateNavBarDecrement()">
+      <button class="nav-button" *ngIf="pagination.beginComputerDisplay != 0" (click)="updateNavBarDecrement()">
         <span class="glyphicon glyphicon-triangle-left"></span>
       </button>
-      <button *ngFor="let nav of navArray; let i = index" class="btn btn-primary nav-button" (click)="updateNavBar(nav)">
+      <button *ngFor="let nav of navArray; let i = index" class="nav-button" (click)="updateNavBar(nav)">
         <span >{{nav+1}}</span>
       </button>
-      <button class="btn btn-primary nav-button" (click)="updateNavBarIncrement()"
+      <button class="nav-button" (click)="updateNavBarIncrement()"
               *ngIf="pagination.beginComputerDisplay + pagination.numberComputerToShow < count">
         <span class="glyphicon glyphicon-triangle-right"></span>
       </button>
     </div>
     <div class="nb-computer-to-show btn-group nav-button-group">
-      <button class="btn btn-primary nb-computer-to-show-btn" (click)="updateNbComputerToShow(10)">
+      <button class="nb-computer-to-show-btn" (click)="updateNbComputerToShow(10)">
         <span>10</span>
       </button>
-      <button class="btn btn-primary nb-computer-to-show-btn" (click)="updateNbComputerToShow(50)">
+      <button class="nb-computer-to-show-btn" (click)="updateNbComputerToShow(50)">
         <span>50</span>
       </button>
-      <button class="btn btn-primary nb-computer-to-show-btn" (click)="updateNbComputerToShow(100)">
+      <button class="nb-computer-to-show-btn" (click)="updateNbComputerToShow(100)">
         <span>100</span>
       </button>
     </div>
