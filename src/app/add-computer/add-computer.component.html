@@ -1,28 +1,29 @@
 <mat-card class="container section-interface">
   <mat-card-title>Add a new Computer</mat-card-title>
-  <form class="form-style">
+  <form class="form-style" [formGroup]="addForm">
     <mat-form-field class="full-width">
     <input type="text" id="computerName" name="computerName"
            placeholder="Computer Name"
-           [(ngModel)]="computer.name"
-           matInput>
+           formControlName="computerName"
+           matInput/>
     </mat-form-field>
+    <show-errors [control]="addForm.controls.computerName"></show-errors>
     <mat-form-field class="full-width">
     <input type="date"  id="introduced" name="introduced"
            placeholder="Introduced Date"
-           [(ngModel)]="computer.introduced"
-           matInput>
+           formControlName="introduced"
+           matInput/>
     </mat-form-field>
     <mat-form-field class="full-width">
         <input type="date"  id="discontinued" name="discontinued"
                placeholder="Discontinued Date"
-               [(ngModel)]="computer.discontinued"
-               matInput>
+               formControlName="discontinued"
+               matInput/>
     </mat-form-field>
     <mat-form-field>
       <mat-select id="companyId" name="companyId"
                   placeholder="Company"
-                  [(ngModel)]="computer.company.id">
+                  formControlName="company">
             <mat-option *ngFor="let company of companyList" value="{{company.id}}"
               placeholder="Company">
               {{company.name}}
@@ -31,7 +32,6 @@
       </mat-form-field>
     <div class="actions pull-right">
       <input (click)="sumbitForm()" type="button" value="Add" class="btn btn-primary">
-      Or
       <a routerLink="/dashboard" class="btn btn-default">Cancel</a>
     </div>
   </form>

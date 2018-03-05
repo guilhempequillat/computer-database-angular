@@ -10,7 +10,7 @@ import {Company} from '../model/company.model';
 @Injectable()
 export class ComputerService {
 
-  private sourceUrl =             'http://127.0.0.1:8080/module-webapp';
+  private sourceUrl =             'http://127.0.0.1:8080/computer-database';
   private getComputerUrl =        this.sourceUrl + '/find-a-computer';
   private getAllComputerUrl =     this.sourceUrl + '/find-computer-pagination';
   private performLoginUrl =       this.sourceUrl + '/perform-login';
@@ -90,7 +90,7 @@ export class ComputerService {
   postCreateComputer(computer: Computer): Observable<any> {
     let headerPostCreateComputer = new HttpHeaders();
     headerPostCreateComputer = headerPostCreateComputer.set('Content-Type', 'text/plain');
-    return this.http.post(`${this.postCreateComptuerUrl}?name=${computer.name}&introduced=${computer.introduced}&discontinued=${computer.discontinued}&idCompany=${computer.company.id}`,
+    return this.http.post(`${this.postCreateComptuerUrl}?name=${computer.name}&introduced=${computer.introducedString}&discontinued=${computer.discontinuedString}&idCompany=${computer.company_id}`,
       '', {withCredentials: true, headers: headerPostCreateComputer});
   }
 

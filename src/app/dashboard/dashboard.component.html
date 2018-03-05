@@ -9,7 +9,8 @@
     <button mat-button routerLink="/delete-company">Delete Company</button>
     <button mat-button (click)="toggleUseFilter()">Filter</button>
   </div>
-  <form *ngIf="pagination.userFilter" class="form-style">
+  <form *ngIf="pagination.userFilter"
+        class="form-style">
     <mat-form-field class="full-width">
       <input matInput
              type="text"
@@ -19,14 +20,14 @@
     </mat-form-field>
     <mat-form-field class="full-width">
       <input matInput
-             type="text"
+             type="date"
              [(ngModel)]="filter.byIntroduced"
              placeholder="By Introduced"
              name="byIntroduced"/>
     </mat-form-field>
     <mat-form-field class="full-width">
       <input matInput
-             type="text"
+             type="date"
              [(ngModel)]="filter.byDiscontinued"
              placeholder="By Discontinued"
              name="byDiscontinued"/>

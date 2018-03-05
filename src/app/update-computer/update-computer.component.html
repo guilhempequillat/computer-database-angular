@@ -3,8 +3,9 @@
   <form (ngSubmit)="onSubmit()" *ngIf="computer" class="form-style" [formGroup]="updateForm">
     <mat-form-field>
       <input type="text" id="computerName"
-             value="{{computer.name}}" name="computerName"
-             placeholder="name"
+             name="computerName"
+             placeholder="Name"
+             value="{{computer.name}}"
              formControlName="name" matInput/>
     </mat-form-field>
     <mat-form-field>
@@ -17,13 +18,16 @@
              value="{{discontinued}}" formControlName="discontinued"
              name="discontinued" matInput/>
     </mat-form-field>
-    <mat-select id="companyId" name="companyId" formControlName="companyId">
+    <mat-form-field>
+    <mat-select id="companyId" name="companyId" formControlName="companyId"
+                placeholder="Company"
+                [(value)]="selected">
       <mat-option *ngFor="let company of listCompany"
-              value="{{company.id}}"
-              placeholder="Company">
+              value="{{company.id}}" selected>
         {{company.name}}
       </mat-option>
     </mat-select>
+    </mat-form-field>
     <div class="actions pull-right">
       <input type="submit" value="Edit" class="btn btn-primary">
       Or

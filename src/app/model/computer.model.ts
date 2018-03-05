@@ -6,6 +6,8 @@ export class Computer {
   name: string;
   introduced: CustomDate;
   discontinued: CustomDate;
+  introducedString: string;
+  discontinuedString: string;
   company: Company;
   company_id: string;
 }

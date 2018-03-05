@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChildren} from '@angular/core';
 import {Computer} from '../model/computer.model';
 import {ComputerService} from '../service/app.service';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +33,8 @@ export class DashboardComponent implements OnInit {
   private navArray = new Array(7);
 
   constructor(private computerService: ComputerService,
-              private router: Router) {
+              private router: Router,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -68,11 +70,17 @@ export class DashboardComponent implements OnInit {
     }, (error: any) => {
         if (error.status === 401) {
           this.router.navigate(['/login']);
-          console.error(error.status);
+        } else if (error.status === 403) {
+          this.openSnackBar('You don\'t have the right to delete a computer', 'Close', 5000);
         }
       }));
   }
 
+  openSnackBar(message: string, action: string, time: number) {
+    this.snackBar.open(message, action, {
+      duration: time,
+    });
+  }
 
   getComputers() {
     if (this.pagination.userFilter) {

@@ -4,6 +4,7 @@ import {Computer} from '../model/computer.model';
 import {ComputerService} from '../service/app.service';
 import {Router} from '@angular/router';
 import {FormGroup, Validators, FormControl} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   private registerForm: FormGroup;
 
   constructor(private computerService: ComputerService,
-              private router: Router) {}
+              private router: Router,
+              private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.loadAComputer(20);
@@ -78,21 +80,30 @@ export class LoginComponent implements OnInit {
 
   performLogin() {
     console.log(this.loginForm.invalid);
-    if(!this.loginForm.invalid){
+    if(!this.loginForm.invalid) {
       this.user.username = this.loginForm.controls.usernameLogin.value;
       this.user.password = this.loginForm.controls.passwordLogin.value;
       console.log(this.user);
       this.computerService.performLogin(this.user)
         .then(() => this.callbackLogin());
-      console.log(this.computerService.getIsConnected());
+    } else {
+      this.openSnackBar('Form inputs are not valid', 'Close', 5000);
     }
   }
 
   callbackLogin(): void {
-    console.log(this.computerService.getIsConnected());
     if (this.computerService.getIsConnected()) {
       this.router.navigate(['/dashboard']);
+    } else {
+      const message = 'User name or password not valid';
+      this.openSnackBar(message, 'Close', 5000);
     }
+  }
+
+  openSnackBar(message: string, action: string, time: number) {
+    this.snackBar.open(message, action, {
+      duration: time,
+    });
   }
 
   loadAComputer(id: number) {
@@ -111,31 +122,22 @@ export class LoginComponent implements OnInit {
     this.performLogin();
   }
 
-  loginModeChange() {
-    this.loginMode = true;
-  }
-
-  registerModeChange() {
-    this.loginMode = false;
-  }
-
   onSubmitRegister() {
-    if(!this.registerForm.invalid && this.registerForm.controls.passwordRegister.value === this.registerForm.controls.confirmPasswordRegister.value){
+    if ( !this.registerForm.invalid && this.registerForm.controls.passwordRegister.value === this.registerForm.controls.confirmPasswordRegister.value ) {
 
       this.registerUserCreation();
 
       this.computerService.register(this.user).subscribe((response: any) => {
         console.log(response);
         this.loginMode = true;
-      }, (error: any) {
+      }, (error: any) => {
         console.error(error);
       });
-    }else if(this.registerForm.controls.passwordRegister.value != this.registerForm.controls.confirmPasswordRegister.value){
-      console.log("Password confirmation not valide");
+    } else if (this.registerForm.controls.passwordRegister.value !== this.registerForm.controls.confirmPasswordRegister.value){
+      this.openSnackBar('Password confirmation not valid', 'Close', 5000);
     } else {
-      console.log("Form not valid");
+      this.openSnackBar('Form inputs are not valid', 'Close', 5000);
     }
-
   }
 
   registerUserCreation() {

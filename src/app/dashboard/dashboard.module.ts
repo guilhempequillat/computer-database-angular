@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {DashboardComponent} from './dashboard.component';
 import {RouterModule} from '@angular/router';
 import {ComputerService} from '../service/app.service';
-import { AddComputerComponent } from '../add-computer/add-computer.component';
+import {AddComputerComponent} from '../add-computer/add-computer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { UpdateComputerComponent } from '../update-computer/update-computer.component';
-import { DeleteCompanyComponent } from '../delete-company/delete-company.component';
-import { AddCompanyComponent } from '../add-company/add-company.component';
+import {UpdateComputerComponent} from '../update-computer/update-computer.component';
+import {DeleteCompanyComponent} from '../delete-company/delete-company.component';
+import {AddCompanyComponent} from '../add-company/add-company.component';
 import {
   MatButtonModule, MatCardModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatSelectModule,
   MatTableModule,
@@ -15,6 +15,7 @@ import {
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from '../material/material.module';
+import {LoginModule} from '../login/login.module';
 
 @NgModule({
   exports: [RouterModule,
@@ -26,7 +27,8 @@ import {MaterialModule} from '../material/material.module';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatTooltipModule],
+    MatTooltipModule
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -41,9 +43,18 @@ import {MaterialModule} from '../material/material.module';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
+    LoginModule
   ],
-  declarations: [DashboardComponent, AddComputerComponent, UpdateComputerComponent, DeleteCompanyComponent, AddCompanyComponent],
-  providers: [ComputerService]
+  declarations: [
+    DashboardComponent,
+    AddComputerComponent,
+    UpdateComputerComponent,
+    DeleteCompanyComponent,
+    AddCompanyComponent
+  ],
+  providers: [
+    ComputerService
+  ]
 })
 export class DashboardModule { }

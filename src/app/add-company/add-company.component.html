@@ -1,14 +1,15 @@
 <mat-card class="container section-interface">
   <mat-card-title>Add a Company</mat-card-title>
-  <form class="form-style">
-        <mat-form-field class="full-width">
-          <input type="text" placeholder="Company Name"
-                 name="companyName"
-                 id="companyName"
-                 [(ngModel)]="companyName"
-                 matInput>
-        </mat-form-field>
-  <div class="">
+  <form class="form-style" [formGroup]="companyForm">
+      <mat-form-field class="full-width">
+        <input type="text" placeholder="Company Name"
+               name="companyName"
+               id="companyName"
+               formControlName="companyNameIn"
+               matInput>
+      </mat-form-field>
+    <show-errors [control]="companyForm.controls.companyNameIn"></show-errors>
+    <div class="">
     <input type="button" (click)="createCompany()" value="Add" class="btn btn-primary">
     <button type="button" class="btn btn-default"
             routerLink="/dashboard">Cancel</button>

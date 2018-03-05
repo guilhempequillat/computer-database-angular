@@ -4,6 +4,7 @@ import {Computer} from '../model/computer.model';
 import {ComputerService} from '../service/app.service';
 import {Company} from '../model/company.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-update-computer',
@@ -20,26 +21,34 @@ export class UpdateComputerComponent implements OnInit {
   private discontinued: string;
   constructor(private route: ActivatedRoute,
               private computerSerivce: ComputerService,
-              private router: Router) { }
+              private router: Router,
+              private snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
     this.updateForm = new FormGroup({
-      name :  new FormControl({
-        validators: [Validators.required]
+      name:  new FormControl('', {
+        validators: [
+          Validators.required
+        ]
       }),
-      introduced : new FormControl({
-        validators: [Validators.pattern('')]
+      introduced: new FormControl('', {
+        validators: [
+        ]
       }),
-      discontinued : new FormControl({
-        validators: [Validators.required]
+      discontinued : new FormControl('', {
+        validators: [
+        ]
       }),
-      companyId : new FormControl({
-        validators: [Validators.required]
+      companyId : new FormControl( '', {
+        validators: [
+        ]
       })
     });
     this.id = this.route.snapshot.paramMap.get('id');
     this.loadComputerToUpdate(this.route.snapshot.paramMap.get('id'));
     this.loadCompanies();
+
   }
 
   loadComputerToUpdate(id) {
@@ -63,11 +72,29 @@ export class UpdateComputerComponent implements OnInit {
           discontinuedMonth + '-' +
           discontinuedDay;
       }
-
+      this.updateForm.controls.companyId.setValue('' + this.computer.company_id);
+      this.updateForm.controls.name.setValue('' + this.computer.name);
+      this.updateForm.controls.introduced.setValue('' + this.introduced);
+      this.updateForm.controls.discontinued.setValue('' + this.discontinued);
       console.log(computer);
       console.log(this.updateForm.value.companyId);
       console.log(typeof(this.updateForm.value.companyId));
     });
+  }
+
+  checkInput(): boolean {
+    if (this.updateForm.controls.introduced.value !== undefined &&
+      this.updateForm.controls.introduced.value !== '' &&
+      this.updateForm.controls.discontinued.value !== undefined &&
+      this.updateForm.controls.discontinued.value !== '') {
+      if (this.getDateValue(this.updateForm.controls.introduced.value) >= this.getDateValue(this.updateForm.controls.discontinued.value)) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
   }
 
   loadCompanies() {
@@ -77,25 +104,58 @@ export class UpdateComputerComponent implements OnInit {
   }
 
   onSubmit() {
-    if (typeof(this.updateForm.value.name) === 'string') {
-      this.computerSerivce.updateName(this.id, this.updateForm.value.name).subscribe((response: any) => {
-        this.router.navigate(['dashboard']);
-      });
+    if (!this.updateForm.invalid && this.checkInput()) {
+      if (typeof(this.updateForm.value.name) === 'string') {
+        this.computerSerivce.updateName(this.id, this.updateForm.value.name).subscribe((response: any) => {
+          this.router.navigate(['dashboard']);
+        }, (error: any) => {
+          if (error.status === 403) {
+            this.openSnackBar('You don\'t have the right to add a computer', 'Close', 5000);
+          }
+        });
+      }
+      if (typeof(this.updateForm.value.introduced) === 'string') {
+        this.computerSerivce.updateIntroduced(this.id, this.updateForm.value.introduced).subscribe( (response: any) => {
+          this.router.navigate(['dashboard']);
+        }, (error: any) => {
+          if (error.status === 403) {
+            this.openSnackBar('You don\'t have the right to add a computer', 'Close', 5000);
+          }
+          });
+      }
+      if (typeof(this.updateForm.value.discontinued) === 'string') {
+        this.computerSerivce.updateDiscontinued(this.id, this.updateForm.value.discontinued).subscribe(( response: any) => {
+          this.router.navigate(['dashboard']);
+        }, (error: any) => {
+          if (error.status === 403) {
+            this.openSnackBar('You don\'t have the right to add a computer', 'Close', 5000);
+          }
+        });
+      }
+      if (typeof(this.updateForm.value.companyId) === 'string') {
+        this.computerSerivce.updateCompany(this.id, this.updateForm.value.companyId).subscribe(( response: any) => {
+          this.router.navigate(['dashboard']);
+        }, (error: any) => {
+          if (error.status === 403) {
+            this.openSnackBar('You don\'t have the right to update a computer', 'Close', 5000);
+          }
+        });
+      }
+    } else if (this.updateForm.invalid) {
+      this.openSnackBar('Form inputs are not valid', 'Close', 5000);
+    } else {
+      this.openSnackBar('Introduced must be before discontinued', 'Close', 5000);
     }
-    if (typeof(this.updateForm.value.introduced) === 'string') {
-      this.computerSerivce.updateIntroduced(this.id, this.updateForm.value.introduced).subscribe( (response: any) => {
-        this.router.navigate(['dashboard']);
-      });
-    }
-    if (typeof(this.updateForm.value.discontinued) === 'string') {
-      this.computerSerivce.updateDiscontinued(this.id, this.updateForm.value.discontinued).subscribe(( response: any) => {
-        this.router.navigate(['dashboard']);
-      });
-    }
-    if (typeof(this.updateForm.value.companyId) === 'string') {
-      this.computerSerivce.updateCompany(this.id, this.updateForm.value.companyId).subscribe(( response: any) => {
-        this.router.navigate(['dashboard']);
-      });
-    }
+  }
+
+  openSnackBar(message: string, action: string, time: number) {
+    this.snackBar.open(message, action, {
+      duration: time,
+    });
+  }
+
+  getDateValue(dateString: string): number {
+    const introducedArray = dateString.split('-');
+    return Number(introducedArray[0]) * 365 + Number(introducedArray[1]) * 31 + Number(introducedArray[2]);
   }
 }

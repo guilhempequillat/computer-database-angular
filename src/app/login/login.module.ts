@@ -9,13 +9,17 @@ import {ShowErrorComponent} from '../show-error/show-error.component';
 import {MaterialModule} from './../material/material.module';
 import {MatButtonModule, MatCardModule, MatInput, MatInputModule, MatTabsModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   exports: [RouterModule,
     MatInputModule,
     MatTabsModule,
     MatButtonModule,
-    MatCardModule],
+    MatCardModule,
+    MatSnackBarModule,
+    ShowErrorComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -24,7 +28,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatTabsModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
   ],
   declarations: [LoginComponent, ShowErrorComponent],
   providers: [ComputerService]
