@@ -69,21 +69,34 @@ footer {
 }
 
 
-
-
-.navigation-dashboard {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  button {
-    background-color: #EEEEEE;
+@media (min-width: 678px) {
+  .navigation-dashboard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     width: 100%;
+    button {
+      background-color: #EEEEEE;
+      width: 100%;
+    }
   }
 }
-
+@media (max-width: 678px) {
+  .navigation-dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    button {
+      background-color: #EEEEEE;
+      width: 100%;
+    }
+  }
+}
 .btn-filter {
   background-color: #FAFAFA;
 }
+
+
 
 
