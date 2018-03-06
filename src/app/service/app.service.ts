@@ -10,7 +10,7 @@ import {Company} from '../model/company.model';
 @Injectable()
 export class ComputerService {
 
-  private sourceUrl =             'http://127.0.0.1:8080/module-webapp';
+  private sourceUrl =             'http://10.0.1.34:8080/computer-database';
   private getComputerUrl =        this.sourceUrl + '/find-a-computer';
   private getAllComputerUrl =     this.sourceUrl + '/find-computer-pagination';
   private performLoginUrl =       this.sourceUrl + '/perform-login';

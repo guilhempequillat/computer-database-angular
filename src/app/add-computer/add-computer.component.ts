@@ -25,7 +25,7 @@ export class AddComputerComponent implements OnInit {
     this.loadCompanies();
     this.computer = new Computer();
     this.computer.company = new Company();
-    const pattern = '[\\w\\s]{0,15}';
+    const pattern = '[\\w\\s./,]{0,}';
     this.addForm = new FormGroup( {
       computerName: new FormControl( '', {
         validators: [

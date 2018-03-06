@@ -32,6 +32,7 @@ export class AddCompanyComponent implements OnInit {
 
 
   createCompany() {
+    this.companyName = this.companyForm.controls.companyNameIn.value;
     if (!this.companyForm.invalid){
       this.computerService.createCompany(this.companyName).subscribe((response: any) => {
         console.log(response);

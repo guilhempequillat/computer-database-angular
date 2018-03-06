@@ -26,10 +26,12 @@ export class UpdateComputerComponent implements OnInit {
   }
 
   ngOnInit() {
+    const pattern = '[\\w\\s./,]{0,}';
     this.updateForm = new FormGroup({
       name:  new FormControl('', {
         validators: [
-          Validators.required
+          Validators.required,
+          Validators.pattern(pattern)
         ]
       }),
       introduced: new FormControl('', {

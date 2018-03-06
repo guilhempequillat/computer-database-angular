@@ -43,6 +43,11 @@ const routes: Routes = [
     component: AddCompanyComponent,
     pathMatch: 'full'
   },
+  {
+    path: '**',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  }
 ]
 
 @NgModule({

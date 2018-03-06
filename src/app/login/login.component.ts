@@ -48,13 +48,14 @@ export class LoginComponent implements OnInit {
       })
     });
 
-    const pattern = '\\w{0,15}';
+    const pattern = '\\w{0,}';
 
     this.registerForm = new FormGroup( {
       usernameRegister: new FormControl( '', {
         validators: [
           Validators.required,
           Validators.minLength(5),
+          Validators.maxLength(15),
           Validators.pattern(pattern)
         ]
       }),
@@ -67,12 +68,17 @@ export class LoginComponent implements OnInit {
       passwordRegister: new FormControl( '', {
         validators: [
             Validators.required,
-            Validators.pattern(pattern)
+            Validators.minLength(5),
+          Validators.maxLength(15),
+          Validators.pattern(pattern),
         ]
       }),
       confirmPasswordRegister: new FormControl( '', {
         validators: [
-          Validators.required
+          Validators.required,
+          Validators.maxLength(15),
+          Validators.minLength(5),
+          Validators.pattern(pattern)
         ]
       })
     });

@@ -45,7 +45,7 @@
     <thead class="">
       <tr class="title-table">
         <td *ngIf="deleteMode">
-          <button (click)="confirmDelete()"  class="btn btn-danger">Trash</button>
+          <button (click)="confirmDelete()"  class="btn btn-danger delete">Trash</button>
         </td>
         <td (click)="changeOrderType('name')"  matTooltip="Order By Name">Name</td>
         <td (click)="changeOrderType('introduced')"  matTooltip="Order By Introduced">Introduced</td>
@@ -54,7 +54,7 @@
       </tr>
     </thead>
     <tr *ngFor="let computer of listComputer; let j = index" class="table-case">
-      <td *ngIf="deleteMode">
+      <td *ngIf="deleteMode" class="delete">
         <input type="checkbox" (click)="getComputerIdToDelete()"
                value="{{computer.id}}"
                name="computerToRemove"/>
