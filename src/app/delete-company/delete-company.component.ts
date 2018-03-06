@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ComputerService} from '../service/app.service';
 import {Company} from '../model/company.model';
 import {Router, RouterLink} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-delete-company',
@@ -14,7 +15,8 @@ export class DeleteCompanyComponent implements OnInit {
   private idCompany: string;
 
   constructor(private computerService: ComputerService,
-              private router: Router) { }
+              private router: Router,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.idCompany = '-1';
@@ -22,7 +24,7 @@ export class DeleteCompanyComponent implements OnInit {
   }
 
   loadCompany() {
-    this.computerService.getCompanies().subscribe((listCompany : Company[]) => {
+    this.computerService.getCompanies().subscribe((listCompany: Company[]) => {
       this.listCompany = listCompany;
     });
   }
@@ -31,7 +33,20 @@ export class DeleteCompanyComponent implements OnInit {
       this.computerService.deleteCompany(this.idCompany).subscribe((response: any) => {
         console.log(response);
         this.router.navigate(['/dashboard']);
-      });
+      },
+        (error: any) => {
+          if (error.status === 403) {
+            this.openSnackBar('You don\'t have the right to add a company', 'Close', 5000);
+          } else {
+            this.openSnackBar('An error occurred', 'Close', 5000);
+          }
+        });
     }
+  }
+
+  openSnackBar(message: string, action: string, time: number) {
+    this.snackBar.open(message, action, {
+      duration: time,
+    });
   }
 }

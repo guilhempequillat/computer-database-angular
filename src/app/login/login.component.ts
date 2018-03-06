@@ -129,12 +129,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitRegister() {
-    if ( !this.registerForm.invalid && this.registerForm.controls.passwordRegister.value === this.registerForm.controls.confirmPasswordRegister.value ) {
+    if (!this.registerForm.invalid && this.registerForm.controls.passwordRegister.value === this.registerForm.controls.confirmPasswordRegister.value) {
       this.registerUserCreation();
       this.computerService.register(this.user).subscribe((response: any) => {
         console.log(response);
         this.loginMode = true;
       }, (error: any) => {
+        if (error.status === 200) {
+          this.openSnackBar('Registration Success', 'Close', 5000);
+        }
         console.error(error);
       });
     } else if (this.registerForm.controls.passwordRegister.value !== this.registerForm.controls.confirmPasswordRegister.value){
